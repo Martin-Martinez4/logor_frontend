@@ -1,0 +1,98 @@
+
+.content__commentBox{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 14rem;
+    margin: auto;
+    margin-bottom: .5rem;
+    /* border-color: var(--UIGrey); */
+    border: none;
+
+    /* text-align: center; */
+}
+
+.commentBox__commentInput{
+
+    width: 94%;
+    height: 80%;
+    margin: .5rem;
+    /* padding: .25rem; */
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--Tertiary);
+    border: 3px solid transparent;
+
+    white-space: pre-wrap;
+
+    font-size: 1rem;
+
+    resize: vertical;
+}
+
+@media screen and (max-width: 375px){
+
+    .commentBox__commentInput{
+
+        width: 88%;
+        margin: auto;
+        margin-bottom: .5rem;
+    }
+}
+
+.content__commentBox>textarea:focus { 
+    outline: none;
+    border: 1px solid var(--Tertiary3);
+    /* box-shadow: 0 0 10px var(--Tertiary); */
+}
+
+.buttonArea__charsLeft{
+
+    color: var(--Secondary1);
+}
+
+@media screen and (max-width: 375px){
+    
+    .buttonArea__charsLeft{
+    
+        font-size: .8rem;
+    }
+
+}
+
+.commentBox__buttonArea{
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+    height: 4rem;
+
+}
+
+@media screen and (max-width: 750px){
+
+    .commentBox__buttonArea{
+        display: block;
+        width: fit-content;
+        margin-bottom: 1rem;
+
+    }
+}
+
+@media screen and (max-width: 375px){
+    
+    .buttonArea__buttons{
+        /* width: fit-content; */
+        height: fit-content;
+        display: flex;
+    
+    }
+
+}
+
+/* .commentBox--buttonArea--button{
+    justify-self: flex-end;
+    border: 1px solid blue;
+} */
+
+
+

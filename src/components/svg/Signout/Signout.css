@@ -1,0 +1,13 @@
+
+.black_icon{
+
+    fill: var(--UIBlack);
+    /* fill: var(--UIWhite); */
+    
+}
+
+.white_icon{
+    
+    fill: var(--UIWhite);
+}
+

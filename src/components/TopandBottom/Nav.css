@@ -1,0 +1,141 @@
+
+.topBar{
+
+    /* background-color: #002233; */
+    background-color: var(--UIBlack);
+    width: 100vw;
+    height: 6vh;
+    border: 1px solid black;
+    display: flex;
+
+    padding: .2rem;
+    box-sizing: border-box;
+
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.topBar__search{
+
+    align-self: center;
+    /* width: 56vw; */
+    width: 100%;
+
+}
+
+.topBar__logo{
+
+    margin: .5rem 0rem .2rem 0rem;
+    width: auto;
+}
+
+@media screen and (max-width: 600px) and (min-width: 551px){
+
+    .topBar__logo{
+
+        width: 3.5rem;
+        margin: .5rem 0rem .2rem 0rem;;
+
+    }
+
+    .topBar__search{
+
+        width: 64vw;
+
+    }
+}
+
+@media screen and (max-width: 550px) and (min-width: 281px){
+
+    .topBar__logo{
+
+        width: 2.5rem;
+        margin: .5rem 4vw .5rem .5rem;
+    }
+
+    .topBar__search{
+
+        width: 64vw;
+
+    }
+}
+
+@media screen and (max-width: 280px){
+
+    .topBar__logo{
+
+        margin: .25rem;
+        width: 2rem;
+    }
+
+    .topBar__search{
+        
+        width: 65vw
+    }
+}
+
+.bottomBar{
+    
+    background-color: #002233;
+    width: 100vw;
+    height: 6vh;
+    border: 1px solid black;
+    display: flex;
+
+}
+
+.topBar2{
+
+    height: auto;;
+}
+
+.dot_container{
+
+    display: flex;
+}
+
+.dot_container{
+
+    margin: .25rem;
+    width: auto;
+
+    cursor: pointer;
+
+
+}
+
+.sandwhich_container{
+
+    margin: .25rem;
+    width: auto;
+
+    cursor: pointer;
+
+    position: relative;
+
+
+}
+
+.topBar_dot{
+
+    background-color: var(--UIWhite);
+
+    margin: .1rem;
+    width: .35rem;
+    height: .35rem;
+
+    border-radius: 100%;
+
+    cursor: pointer;
+}
+
+.topBar_sandwhich{
+
+    background-color: var(--UIWhite);
+
+    margin: .25rem;
+    width: 1.5rem;
+    height: .15rem;
+}
+
+

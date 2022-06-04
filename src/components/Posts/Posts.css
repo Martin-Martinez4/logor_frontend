@@ -1,0 +1,423 @@
+
+
+.post{
+    display: flex;
+
+    /* min-height: 4rem; */
+
+    align-items: flex-start;
+
+    flex-direction: row;
+    border-color: var(--Primary3);
+    margin:0;
+    gap:0;
+}
+
+.post>.user_content{
+    display: flex;
+    flex-direction: column;
+    /* gap: .5rem; */
+    padding: 1.2rem 0rem 0rem 0rem;
+    margin: .5rem;
+    margin-right: 0px;
+    width: 50vw;
+
+    overflow-wrap: break-word;
+   
+}
+.post>.user_content>.user_info{
+    gap: .5rem;
+   
+}
+
+.post_body_text{
+    margin: .5rem 0rem 2.5rem 0rem;
+    white-space:pre-line;
+    line-height: 1.25rem;
+    width: 50vw;
+}
+
+@media screen and (max-width: 750px){
+
+    .post>.user_content>.user_info{
+        gap:  .5rem;
+        display: contents;
+       
+    }
+
+
+}
+
+@media screen and (max-width: 1264px) and (min-width: 941px){
+
+    .post>.user_content{
+       width: 77vw;
+       
+    }
+
+    .post_body_text{
+        width: 77vw
+    }
+}
+/* 
+@media screen and (max-width: 1299px) and (min-width: 941px){
+
+    .post>.user_content{
+       width: 77vw;
+       
+    }
+} */
+
+@media screen and (max-width: 941px) and (min-width: 651px){
+
+    .post>.user_content{
+       width: 75vw;
+       
+    }
+
+    
+    .post_body_text{
+        width:75vw;
+    }
+
+}
+
+@media screen and (max-width: 650px) and (min-width: 521px){
+
+    .post>.user_content{
+       width: 72vw;
+       
+    }
+
+    .post_body_text{
+        width:72vw;
+    }
+}
+
+@media screen and (max-width: 520px) and (min-width: 481px){
+
+    .post>.user_content{
+       width: 70vw;
+       
+    }
+
+    .post_body_text{
+        width:70vw;
+    }
+}
+
+@media screen and (max-width: 480px) and (min-width: 351px){
+
+    .post>.user_content{
+       width: 65vw;
+       
+    }
+
+    .post_body_text{
+        width: 65vw;
+    }
+}
+
+
+@media screen and (max-width: 350px) and (min-width: 280px){
+    
+    .post>.user_content{
+        width: 58vw;
+        
+    }
+
+    .post_body_text{
+        width: 58vw;
+    }
+}
+
+@media screen and (max-width: 279px){
+
+    .post>.user_content{
+       width: 50vw;
+       
+    }
+
+    .post_body_text{
+        width: 50vw;
+    }
+}
+
+.user_image{
+    align-items: flex-start;
+    padding: .5rem 0rem 0rem 0rem;
+    margin: .5rem .25rem .5rem .5rem;
+}
+
+.post_user_image{
+
+    width: 4rem;
+    border-radius: 100%;
+    border-radius: 100%;
+    box-shadow: -1px -1px 10px var(--Tertiary3);
+    box-sizing: border-box;
+
+}
+
+.user_info__pipe{
+
+    color: var(--UIGrey);
+}
+
+
+@media screen and (max-width: 300px){
+
+    .post_body_text{
+        word-break: normal;
+    }
+}
+
+@media screen and (max-width: 300px){
+    .post_user_image{
+
+        width: 3rem;
+    
+    }
+
+    .user_image{
+      
+        margin: .8rem .25rem .5rem .5rem;
+    }
+}
+
+.option_dots{
+    position: relative;
+    display: flex;
+    margin: .75rem .75rem 0 0;
+
+    height: fit-content;
+
+    cursor: pointer;
+
+}
+
+.option_dots>.dot{
+
+    height: .2rem;
+    width: .2rem;
+    background-color: var(--Tertiary2);
+
+    border-radius: 50%;
+    border: groove 1px var(--Primary2);
+
+    margin: .05rem;
+}
+
+.option_dots>.dropdown{
+    position: absolute;
+    left: -6rem;
+    top: 0px;
+
+    border: solid 1px var(--Primary1);
+    border-radius: 5%;
+    background: var(--UIWhite);
+
+    
+    width: 8rem;
+    height: fit-content;
+    
+    text-align: center;
+    
+    z-index: 2;
+}
+
+.dropdown{
+    position: absolute;
+    left: -6rem;
+    top: 0px;
+
+    border: solid 1px var(--Primary1);
+    border-radius: 5%;
+    background: var(--UIWhite);
+
+    
+    width: 8rem;
+    height: fit-content;
+    
+    text-align: center;
+    
+    z-index: 2;
+}
+
+.invisible{
+    display: none;
+}
+.visible{
+    display: block;
+}
+
+.option_dots>.dropdown p{
+
+    border-bottom: dotted 2px var(--Primary2);
+}
+
+.post.deleted{
+
+    background-color: var(--Secondary3);
+
+    min-height: 6rem;
+
+    text-align: center;
+
+    border: solid 1px var(--UIGrey1)
+
+}
+
+.post.deleted>.post_body_text{
+
+    margin: auto;
+
+    color: var(--UIGrey);
+}
+
+.post__bottomArea{
+
+    height: auto;
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+
+}
+
+.post__icons{
+
+    height: auto;
+    width: 90%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: space-around;
+}
+
+.post__lastEdited{
+
+    font-size: var(--x-small);
+    color: var(--UIGrey);
+    font-weight: bolder;
+
+    min-width: fit-content;
+
+    margin: 0;
+}
+
+.post__lastEdited p{
+
+    margin: .2rem;
+}
+
+.userNameArea{
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.datePosted{
+
+    font-size: var(--x-small);
+}
+
+@media screen and (min-width: 751px){
+
+    .on_Gthan750px{
+
+        display: flex;
+    }
+
+    .on_750px{
+
+        display: none;
+    }
+}
+
+@media screen and (max-width: 750px){
+
+    .on_Gthan750px{
+
+        display: none;
+    }
+
+    .on_750px{
+
+        display: flex;
+    }
+}
+
+@media screen and  (max-width: 660px) and (min-width: 360px){
+
+    .commentBox__buttonArea{
+
+        flex-direction: column;
+    }
+
+    .post__bottomArea{
+
+        display: block;
+
+        width: 70vw;
+    }
+
+    .post__lastEdited p{
+
+        font-size: var(--smaller);
+    }
+
+  
+}
+
+@media screen and  (max-width: 660px) and (min-width: 360px){
+
+    .commentBox__buttonArea{
+
+        flex-direction: column;
+    }
+
+    .post__bottomArea{
+
+        width: 70vw;
+    }
+
+  
+}
+
+@media screen and (max-width: 400px){
+
+    .userNameArea{
+
+        width: 100%;
+    }
+
+    .post__bottomArea{
+
+        display: block;
+
+    }
+
+    .post__lastEdited{
+
+        width: max-content;
+    }
+
+}
+
+
+
+
+
+
+

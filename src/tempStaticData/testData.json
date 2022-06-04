@@ -1,0 +1,128 @@
+
+{
+    "login":{
+
+            "1":{
+                "username": "Monk1",
+                "password":"Monk1"
+            },
+            "2":{
+                "username": "Monkely",
+                "password":"password"
+            },
+            "3":{
+                "username": "Ape2",
+                "password":"bannana"
+            },
+            "4":{
+                "username": "Mike",
+                "password":"Gibbon"
+            },
+            "5":{
+                "username": "JungleJim",
+                "password":"Gibbon"
+            },
+            "6":{
+                "username": "bannanerHammer",
+                "password":"Gibbon"
+            }
+
+    },
+    
+    "users":{
+
+        "1":{
+
+            "username": "Monk1",
+            "tag": "@1Monk",
+            "profile_pic_url": "../../users/default/Monkey_2.svg"
+        },
+        "2":{
+
+            "username": "Monkely",
+            "tag": "@Monkely",
+            "profile_pic_url": "../../users/default/Monkey_2.svg"
+        },
+        "3":{
+
+            "username": "2Ape",
+            "tag": "@2a-pe",
+            "profile_pic_url": "../../assets/Monkey_1.svg"
+        },
+        "4":{
+
+            "username": "Mike",
+            "tag": "@meMike",
+            "profile_pic_url": "../../assets/Monkey_1.svg"
+        },
+        "5":{
+
+            "username": "jungleJim",
+            "tag": "@jungleJim",
+            "profile_pic_url": "../../assets/Monkey_1.svg"
+        },
+        "6":{
+
+            "username": "bannanerHammer",
+            "tag": "@bHammer",
+            "profile_pic_url": "../../assets/Monkey_1.svg"
+        }
+    },
+
+    "headers":{
+
+        "1":{
+
+            "description": "First member of the site",
+            "header_img_url": "../../users/1/unsplash_GBEHjsPQbEQ.png",
+            "location": "New Ape City; The Great Cayon",
+            "links": "apes.apes",
+            "joined_date": "1/25/2015"
+        },
+        "2":{
+
+            "description": "Return to monkey.  Become primitive and be set free.  I am not na ape, I am a monkey",
+            "header_img_url": "...",
+            "location": "Jungle",
+            "links": "",
+            "joined_date": "1/25/2020"
+        },
+        "3":{
+
+            "description": "Not one but 2.",
+            "header_img_url": "...",
+            "location": "New Ape City",
+            "links": "https://youtu.be/Axne054PkM4",
+            "joined_date": "1/25/2015"
+        },
+        "4":{
+
+            "description": "Fourth member of the site",
+            "header_img_url": "...",
+            "location": "New Ape City; The Great Cayon",
+            "links": "apes.apes",
+            "joined_date": "1/25/2015"
+        },
+        "5":{
+
+            "description": "First member of the site",
+            "header_img_url": "...",
+            "location": "New Ape City; The Great Cayon",
+            "links": "apes.apes",
+            "joined_date": "1/25/2015"
+        },
+        "6":{
+
+            "description": "First member of the site",
+            "header_img_url": "...",
+            "location": "New Ape City; The Great Cayon",
+            "links": "apes.apes",
+            "joined_date": "1/25/2015"
+        }
+    }
+}
+
+
+
+
+

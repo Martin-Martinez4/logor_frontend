@@ -1,0 +1,621 @@
+
+/* Need to add media queries for tablet sizes */
+
+/* Setup color scheme and spacing */
+:root{
+
+  box-sizing: border-box;
+
+  /* Blacks and Greys */
+  --UIBlack: rgba(0, 34, 51, 1);
+  --UIGrey: rgba(0, 34, 51, .75);
+  --UIGrey1: rgba(0, 34, 51, .50);
+  --UIGrey2: rgba(0, 34, 51, .25);
+  --UIGrey3: rgba(0, 34, 51, 0.1);
+  --UIGray: rgba(0, 34, 51, .75);
+  --UIGray1: rgba(0, 34, 51, .50);
+  --UIGray2: rgba(0, 34, 51, .25);
+  --UIGray3: rgba(0, 34, 51, 0.1);
+
+  /* White */
+  --UIWhite:  rgba(255,255,255,1);
+
+  /* Reds */
+  --Red: rgba(164, 53, 31, 1);
+  --Red1: rgba(164, 53, 31, 0.9);
+  --Red2: rgba(164, 53, 31, 0.8);
+  --Red3: rgba(164, 53, 31, 0.7);
+  --Red4: rgba(164, 53, 31, 0.6);
+
+  /* Primary Colors */
+  --Primary: #338877;
+  --Primary1: rgba(51, 136, 119, 0.75);
+  --Primary2: rgba(51, 136, 119, 0.5);;
+  --Primary3: rgba(51, 136, 119, 0.25);
+  --Primary4: rgba(51, 136, 119, 0.15);
+ 
+
+  /* Secondary Colors */
+  --Secondary: #336F88;
+  --Secondary1:rgba(51, 111, 136, 0.75);
+  --Secondary2:rgba(51, 111, 136, 0.50);
+  --Secondary3: rgba(51, 111, 136, 0.25);
+
+  /* Tertiary Colors */
+  --Tertiary: rgba(51, 136, 77, 1);
+  --Tertiary1: rgba(51, 136, 77, 0.75);
+  --Tertiary2: rgba(51, 136, 77, 0.50);
+  --Tertiary3: rgba(51, 136, 77, 0.25);
+
+  /* Header Sizes */
+  --HeaderH1: 2.5rem;
+  --HeaderH2: 2rem;
+  --HeaderH3: 1.5rem;
+  --HeaderH4: 1rem;
+  --HeaderH5: .5rem;
+  --HeaderH6: .25rem;
+
+  /* font-sizes */
+  --x-small: .8rem;
+  --xx-small: .75rem;
+  --smaller: .70rem;
+
+  color: var(--UIBlack);
+
+  line-height: 1rem;
+
+}
+
+.pointer{
+
+  cursor: pointer;
+}
+
+.onHover_border--Primary:hover{
+
+  border: solid 2px var(--Primary2);
+
+}
+
+@media screen and (max-width: 320px){
+  :root{
+    line-height: normal;
+  }
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./assets/lato-v20-latin-regular.woff2') format('woff2'),
+      url('./assets/Lato-Regular.ttf') format('truetype');
+}
+
+
+.hidden{
+
+  display: none;
+}
+
+
+@media screen and (orientation:landscape ){
+
+  .hiddenOnLandscape{
+
+    display: none;
+  }
+
+  .hiddenOnPortrait{
+
+    display: block;
+  }
+}
+
+@media screen and (orientation:portrait ){
+
+  .hiddenOnPortrait{
+
+    display: none;
+  }
+
+  .hiddenOnLandscape{
+
+    display: block;
+  }
+}
+
+@media screen and (orientation:landscape) and (max-width: 914px){
+
+  .hiddenOnLandscapeScreen914px{
+
+    display: none;
+  }
+
+  .hiddenOnPortraitScreen914px{
+
+    display: block;
+  }
+}
+
+@media screen and (orientation:portrait) and (max-width: 914px){
+
+  .hiddenOnPortraitScreen914px{
+
+    display: none;
+  }
+
+  .hiddenOnLandscapeScreen914px{
+
+    display: block;
+  }
+}
+
+body, html { 
+  overflow-x: hidden; 
+  overflow-y: hidden;
+  font-family: 'Lato-Regular', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 100%;
+  /* background-color: var(--UIGrey3); */
+}
+body, html { 
+  overflow-x: hidden; 
+  overflow-y: hidden;
+}
+
+
+
+@media (max-width: 991.98px) {
+
+  .card{ 
+    overflow-x:auto; 
+    overflow-y:auto;
+  }
+ 
+}
+
+@media(min-width: 600px){
+  body, html{
+    
+    font-size: 18px;
+  }
+}
+
+
+h1{
+  font-size: var(--HeaderH1);
+  /* margin: 2rem; */
+}
+
+
+h2{
+  font-size: var(--HeaderH2);
+  /* margin: 2rem; */
+
+}
+h3{
+  font-size: var(--HeaderH3);
+  /* margin: 2rem; */
+
+}
+h4{
+  font-size: var(--HeaderH4);
+  /* margin: 2rem; */
+
+}
+h5{
+  font-size: var(--HeaderH5);
+  /* margin: 2rem; */
+
+}
+
+.padding-bottom__8rem{
+
+  padding-bottom: 8rem;
+
+}
+
+.relative{
+  position: relative;
+
+}
+
+.flexColContainer{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width:100%;
+  height: 90%;
+}
+
+.flexColContainer2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fitContent{
+
+  width: fit-content;
+  height: fit-content;
+}
+
+.flexRowContainer{
+
+  display: flex;
+  
+}
+
+.flexRowContainer2{
+
+  display: flex;
+  
+}
+
+.height75{
+
+  height: 75vh;
+}
+
+.height50{
+
+  height: 50vh;
+}
+.height100Percent{
+
+  height: 100%;
+}
+
+.error{
+
+  color: var(--Red);
+}
+
+.errorBackground{
+  /* background-color: var(--Red2); */
+  background-image: linear-gradient(to bottom right, var(--Red),var(--Red3));
+  width: 55%;
+  height: auto;
+  text-align: center;
+
+
+  color: var(--UIWhite);
+  
+}
+
+.errorBackground {
+  animation: appear .5s cubic-bezier(0.1,0.4,1,0.2) 0s;
+}
+
+@keyframes appear {
+  0%{opacity:0%}
+  25% {opacity:25%}
+  50% {opacity:50%}
+  75% {opacity:75%}
+  100% {opacity:100%}
+}
+
+.hdden {
+  opacity: 0%;
+  display: none;
+
+  height: auto;
+  text-align: center;
+}
+
+.fadeOut{
+  background-image: linear-gradient(to bottom right, var(--Red),var(--Red3));
+  width: 55%;
+  height: auto;
+  text-align: center;
+
+  color: var(--UIWhite);
+  
+  animation: fade .5s cubic-bezier(0.1,0.4,1,0.2) 0s;
+  opacity: 0%;
+
+}
+
+
+@keyframes fade {
+  0%{opacity:100%}
+  25% {opacity:75%}
+  50% {opacity:50%}
+  75% {opacity:25%}
+  100% {opacity:0%}
+}
+
+
+
+@media screen and (max-width: 1024px){
+  
+  .errorBackground{
+    width: 80%;
+  }
+
+}
+
+
+
+button.button, input[type=file]::file-selector-button, input::-webkit-file-upload-button, a.button{
+
+  cursor: pointer;
+
+  width: 6vw;
+  height: auto;
+
+  margin: 4px;
+  padding: 1px 6px;
+
+  font-family:'Arial, Helvetica, sans-serif';
+
+  box-sizing: border-box;
+
+  border-radius: 5px;
+  border: 1px solid var(--UIGrey1);
+  border-style: outset;
+  display: inline-block;
+  text-align: center;
+  line-height: 2.5rem;
+  /* background-color: var(--Red1); */
+ 
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  
+  text-align: center;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--UIWhite);
+
+  transition: all .2s ease-in-out;
+  transition: scale .2s linear;
+
+}
+
+@media screen and (max-width: 375px){
+
+  button.button, input[type=file]::file-selector-button, input::-webkit-file-upload-button, a.button{
+
+    width: 5rem;
+  }
+}
+
+@media (max-width: 991.98px) and (min-width: 375px){
+
+  button.button, input[type=file]::file-selector-button, input::-webkit-file-upload-button, a.button{
+
+    width: 20vw;
+    height: 3rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 991.98px) {
+
+  button.button, input[type=file]::file-selector-button, input::-webkit-file-upload-button, a.button{
+
+    width: 8vw;
+  }
+}
+
+@media only screen 
+and (min-width: 1024px) 
+and (max-height: 1366px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1.5) {
+
+  button.button, input[type=file]::file-selector-button, input::-webkit-file-upload-button, a.button{
+
+    width: 6rem;
+    height: 3rem;
+  }
+}
+
+
+
+input[type=file]::file-selector-button{
+  
+  width: 5vw;
+  height: auto;
+  margin:0;
+  margin-right: 10px;
+  text-align:center;
+
+}
+
+@media (max-width: 991.98px) {
+
+  input[type=file]::file-selector-button{
+  
+    width: 30vw;
+    height: auto;
+    margin:0;
+    margin-right: 10px;
+    text-align:center;
+  
+  }
+}
+
+button.button:hover, a.button:hover, input::-webkit-file-upload-button:hover{
+
+  /* background-color: var(--Red); */
+
+  transform: background-color 1000ms linear;
+  transform: scale(1.05);
+}
+
+button.button.red, a.button.red{
+
+  background-color: var(--Red1);
+
+}
+
+button.button.red:hover, a.button.red:hover{
+
+  background-color: var(--Red); 
+
+}
+
+button.button.primary, a.button.primary, input[type=file]::file-selector-button{
+
+  background-color: var(--Primary1);
+
+}
+
+button.button.primary:hover, a.button.primary:hover, input::-webkit-file-upload-button:hover{
+
+  background-color: var(--Primary); 
+
+}
+
+.upperLeft{
+
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  line-height: 3vh;
+
+  margin-bottom: 2px;
+}
+input{
+    
+  width: 16vw;
+  height: 1.75rem;
+  font-size: 1rem;
+  border-radius: 10px ;
+  align-self: flex-start;
+  border: 2px solid var(--UIGrey1);
+
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+@media (max-width: 991.98px) {
+
+  input{
+
+    width: 45vw;
+  }
+}
+
+/* Ipad Pro Protrait Mode */
+@media only screen 
+and (min-width: 1024px) 
+and (max-height: 1366px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1.5) {
+
+  input{
+
+    width: 50vw;
+  }
+}
+
+
+input:hover{
+  outline: none;
+  border: 2px solid var(--Primary);
+}
+input:focus{
+  outline: none;
+  border: 2px solid var(--Primary);
+  box-shadow: 2px 2px 5px var(--Primary3);
+}
+
+
+
+label > input[type=checkbox] {
+  margin-right: .5rem;
+  display: inline-block;
+  width: auto;
+  height: auto;
+}
+
+.inputName{
+
+  line-height: 1rem;
+  margin-top: 1.2rem;
+  margin-bottom: .25rem;
+  margin-left: 0;
+  margin-right: 0;
+
+  font-weight: 500;
+}
+
+
+
+
+.margin1{
+
+  margin: 1rem;
+}
+
+.file_input{
+
+  width: 30vw;
+  height: auto;
+
+  align-self: auto;
+
+}
+
+@media (max-width: 991.98px) {
+
+  .file_input{
+
+    width: 75vw;
+    
+  }
+}
+
+/* ipad Mini Landscape */
+@media only screen and (width:1024px) {
+  .file_input{
+
+    width: 50vw;
+    
+  }
+
+  input{
+
+    width: 25vw;
+  }
+}
+
+/* // Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... } */
+
+
+/* @media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... } */
+/* 
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... } */
+
+/* // Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... } */
+
+input[type="file"]::-webkit-file-upload-button{
+
+  width: fit-content;
+}
+
+
+
+
+

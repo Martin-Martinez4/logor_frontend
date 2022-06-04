@@ -1,0 +1,272 @@
+
+.landingPage{
+    height: calc(100vh - 12vh);
+    width: 100vh;
+    display: flex;
+    
+}
+
+.inner>span{
+  
+    margin: .5rem;
+    
+  }
+
+.signin{
+
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.signin_image_container{
+    width: 70vw;
+    height: auto;
+}
+
+/* Media queries  here */
+.landingImage{
+    background-image:
+    linear-gradient(var(--Primary), var(--UIWhite)), url("../../assets/ryunosuke-kikuno-RKwivgSTXVI-unsplash.jpg");
+    height: calc(100vh - 12vh); /* You must set a specified height */
+    width: 70vw; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    background-blend-mode: saturation;
+
+}
+
+
+.flexColContainer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width:100%;
+    height: 90%;
+}
+
+@media screen and (orientation:portrait) and (min-width: 420px) {
+
+    .flexColContainer{
+
+      
+        justify-content: center;
+    
+    }
+   
+}
+
+@media screen and (min-width: 991.98px) {
+
+    .flexColContainer{
+
+      
+        justify-content: center;
+    
+    }
+   
+   
+}
+
+.inner{
+    width: 40vw;
+    height: auto;
+  
+}
+
+
+.flexRowContainer{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width:100%;
+    height: 90%;
+}
+
+.signin{
+    width: 30vw;
+}
+
+@media screen and (max-width: 991.98px) {
+
+    .signin{ 
+      overflow-x:auto; 
+      overflow-y:auto;
+      width: 50vw;
+    }
+   
+}
+
+.inner{
+    width: 30vw;
+    height: auto;
+    gap:  10px;
+    margin-bottom: .5rem;
+
+}
+
+@media screen and (max-width: 991.98px) {
+
+    .inner{
+        width: 50vw;
+    }
+    
+    .landingPage{
+        height: calc(100vh - 12vh);
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .landingImage{
+  
+      width: 100vw;
+      height: calc(100vh - 12vh);
+      display: none;
+
+    }
+
+    .signin{
+        width: auto;
+        height: auto;
+        background: var(--UIWhite);
+        /* padding: 1rem 2rem 1rem 2rem; */
+        padding: 2rem;
+
+       
+    }
+
+    .signin_image_container{
+        width: 100vw;
+        height: 100vh;
+
+        margin-bottom: .5rem;
+
+        background-image:
+        linear-gradient(180deg, var(--Primary1), var(--UIWhite)), url("../../assets/ryunosuke-kikuno-RKwivgSTXVI-unsplash.jpg");
+        height: 100%; /* You must set a specified height */
+        width: 100vw; /* You must set a specified height */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        background-blend-mode: saturation;
+
+        z-index: -1;
+        position: absolute;
+
+    }
+
+  
+    
+}
+
+@media screen and (min-width: 700px) and (max-width: 991.98px){
+
+    .signin{
+
+        padding: 4rem 2rem 4rem 2rem;
+
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    /* .signin{
+
+        width: 80vw;
+    } */
+
+    .signin>h1{
+
+        font-size: var(--HeaderH2);
+        margin: .5rem;
+    }
+
+    .signin>h2{
+
+        font-size: var(--HeaderH3);
+        margin: .5rem;
+
+    }
+
+    input{
+
+        width: 60vw;
+    }
+
+    .inner{
+
+        width: 60vw;
+    }
+}
+
+@media only screen and (width:1024px) {
+    .inner>span{
+  
+      width: 25vw;
+      
+    }
+ 
+}
+
+/* Ipad Pro Protrait Mode */
+@media only screen 
+and (min-width: 1024px) 
+and (max-height: 1366px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1.5) {
+
+    .landingPage{
+        height: calc(100vh - 12vh);
+        width: 100vh;
+        display: flex;
+        
+    }
+
+    .landingImage{
+  
+      width: 40vw;
+      height: calc(100vh - 12vh);
+    }
+
+    .signin{
+        height: calc(100vh - 12vh);
+        width: 60vw;
+        margin: 0;
+    }
+
+    .signin_image_container{
+        height: calc(100vh - 12vh);
+        width: 40vw;
+        /* height: auto; */
+
+    }
+}
+
+/* @media screen and (orientation:landscape ) {
+    
+    .flexColContainer{
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:baseline;
+
+    
+        width:100%;
+        height: 90%;
+    }
+} */
+
+
+
+
+

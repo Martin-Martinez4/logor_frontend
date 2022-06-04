@@ -1,0 +1,92 @@
+
+.miniProfile{
+
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px var(--Primary3);
+    width: 95%;
+    gap: .5rem;
+    
+}
+.miniProfile> .profilePicture{
+
+    width: 3rem;
+    margin-bottom: 2rem;
+    margin-top: .5rem;
+
+    border-radius: 100%;
+    box-shadow: -1px -1px 10px var(--Tertiary3);
+    box-sizing: border-box;
+    /* border: 1px solid var(--UIWhite); */
+}
+
+.miniProfile> .profileName{
+
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    
+    margin: 0;
+    padding: 0;
+    font-size: .8rem;
+
+}
+.miniProfile> .profileName>p{
+
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    width:fit-content;
+    
+}
+
+.miniProfile> .profileName>button{
+
+    height: 1.5rem;
+    width: 3rem;
+    padding: 0;
+    margin: 0;
+    margin-top: .5rem;
+    line-height: 1rem;
+    /* background-color: var(--Primary); */
+    font-size: .75rem;
+
+    align-self: flex-start;
+    
+}
+
+.miniProfile> .button{
+
+    height: 2rem;
+    width: 2rem;
+    padding: 0;
+    margin: 0;
+    line-height: 1rem;
+    background-color: var(--Primary);
+    font-size: .75rem;
+
+}
+
+.miniProfile_link{
+
+    margin: 0;
+    width: fit-content;
+    text-align: left;
+    color: var(--UIBlack);
+
+    text-decoration: none;
+
+
+}
+
+.miniProfile_link:hover{
+
+    color: var(--Tertiary);
+
+}
+
+.miniProfile_link>p{
+
+    margin: 0;
+}
+

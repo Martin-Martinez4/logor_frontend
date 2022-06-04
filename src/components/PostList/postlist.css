@@ -1,0 +1,240 @@
+
+.empty{
+
+    width: 100%;
+    height: 15vh;
+}
+
+.postlist_horizontal{
+    
+    display:flex;
+    flex-direction: column;
+}
+
+.med_suggestion{
+
+    text-align: center;
+    display: none;
+    border-color: var(--Primary3);
+
+
+}
+
+@media screen and (max-width: 1264px){
+    
+    .med_suggestion{
+
+        display: block;
+    }
+}
+
+.med_suggestion>div{
+
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.med_suggestion>.suggestions{
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+}
+
+.med_suggestion>.features{
+
+    width: auto;
+
+    display: flex;
+    justify-content: center;
+    padding: .25rem;
+
+}
+
+.med_suggestion>.features>.miniProfile{
+
+    width: 42%;
+    margin: 1rem 0rem .5rem 2rem;
+
+}
+
+
+@media screen and (max-width: 750px){
+
+    .med_suggestion>.features{
+    
+        display: contents;
+      
+    
+    }
+}
+
+@media screen and (max-width: 240px){
+
+    .med_suggestion>.features>.miniProfile{
+
+        width: 100%;
+        margin: .5rem .5rem 0rem .5rem;
+
+    }
+}
+
+
+.content__commentBox{
+
+    width: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 14rem;
+    margin: .2rem 0rem 0rem 0rem;
+    /* border-color: var(--UIGrey); */
+    border: none;
+
+    /* text-align: center; */
+}
+
+.commentBox__commentInput{
+
+    width: 94%;
+    height: 80%;
+    margin: .5rem;
+    padding: .25rem;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--Tertiary);
+    border: 3px solid transparent;
+
+    font-size: 1rem;
+
+    resize: vertical;
+}
+
+@media screen and (max-width: 375px){
+
+    .commentBox__commentInput{
+
+        width: 88%;
+    }
+}
+
+.content__commentBox>textarea:focus { 
+    outline: none;
+    border: 1px solid var(--Tertiary3);
+    /* box-shadow: 0 0 10px var(--Tertiary); */
+}
+
+.buttonArea__charsLeft{
+
+    color: var(--Secondary1);
+}
+
+@media screen and (max-width: 375px){
+    
+    .buttonArea__charsLeft{
+    
+        font-size: .8rem;
+    }
+
+}
+
+.commentBox__buttonArea{
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+    height: 4rem;
+
+}
+
+@media screen and (max-width: 375px){
+    
+    .buttonArea__buttons{
+        /* width: fit-content; */
+        height: fit-content;
+        display: flex;
+    
+    }
+
+}
+
+.posts-see_more{
+
+    cursor: pointer;
+
+    color: var(--Secondary);
+
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+
+    text-decoration: underline;
+}
+
+.posts-see_more:hover{
+
+    /* cursor: pointer; */
+
+    color: var(--Secondary1);
+}
+
+.postlist-tabs{
+
+    width: 99.8%;
+
+    background-color: var(--Secondary);
+
+    display: flex;
+    /* justify-content: space-evenly; */
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    border: var(--Primary3);
+    
+    list-style: none;
+
+    flex-wrap: wrap;
+
+    margin-bottom: .25rem;
+}
+
+.postlist-tabs li{
+
+    list-style: none;
+
+    color: var(--UIWhite);
+    text-align: center;
+
+    border: solid 1px var(--Secondary3);
+    border-bottom: none;
+    border: 50%;
+    box-sizing: border-box;
+    /* box-shadow: 1px 1px 1px var(--UIBlack); */
+
+    min-width: 5rem;
+    padding: 10px 0;
+
+    cursor: pointer;
+}
+
+.tab_active{
+
+    background-color: var(--UIBlack);
+    color: var(--UIWhite);
+    box-shadow: -1px -1px 1px var(--Secondary2) inset;
+}
+
+.postlist-tabs li:hover{
+
+   background-color: var(--UIBlack);
+   color: var(--UIWhite)
+  
+}
+
+
+
+
+
+
+

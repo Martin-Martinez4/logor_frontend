@@ -1,0 +1,85 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--UIBlack);
+    opacity: .1;
+  }
+  
+  .modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+  }
+  
+  .modal {
+    z-index: 100;
+    background: var(--UIWhite);
+    position: relative;
+    margin: 1.75rem auto;
+    border-radius: 3px;
+    width: fit-content;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .button.modal-close-button {
+    font-size: 1.4rem;
+    width: 3rem;
+    height: 2rem;
+    color: var(--UIWhite);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--UIBlack);
+    cursor: pointer;
+    border: none;
+  }
+  .button.modal-close-button > span {
+
+    color: var(--UIWhite);
+    
+  }
+
+  
+  
+  button {
+    font-size: .9rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    padding: .3rem 1rem;
+    margin-left: .5rem;
+  }
+  
+  /* .button-default {
+    background: #247BA0;
+    color: #fff;
+  } */
+
+  
+
+
+
+
+@media screen and (max-width: 991.98px) {
+
+
+  
+    
+}
+

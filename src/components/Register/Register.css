@@ -1,0 +1,85 @@
+
+.register{
+    background-image:
+    linear-gradient(var(--Primary), var(--UIWhite)), url("../../assets/ryunosuke-kikuno-RKwivgSTXVI-unsplash.jpg");
+    height: 100vh; /* You must set a specified height */
+    width: 100vw; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    background-blend-mode: saturation;
+
+    z-index: 0;
+}
+
+@media (max-width: 991.98px) {
+
+    .register{
+
+        background-image:
+        linear-gradient(var(--Primary), var(--UIWhite)), url("../../assets/ryunosuke-kikuno-RKwivgSTXVI-unsplash__mobile2.jpg");
+
+        justify-content: center;
+    }
+}
+
+
+.registeration_progress{
+
+    margin-top: 2rem;
+
+}
+
+.round{
+
+    border-radius: 100%;
+
+}
+
+.round.profileImage{
+    
+    /* border: 2px solid var(--UIBlack); */
+
+    width: 5rem;
+    height: 5rem;
+
+    margin: .25rem;
+}
+
+.profile_image_container{
+
+    width: 85vw;
+    flex-wrap: wrap;
+}
+
+/* ipad Mini Landscape */
+@media only screen and (width:1024px) {
+    .profile_image_container{
+
+        width: 50vw;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 991.98px) {
+
+    .form_warning{
+  
+      width: 45vw;
+    }
+}
+
+.form_warning{
+
+    color: var(--UIWhite);
+
+    background-color: var(--Red1);
+    width: 60%;
+
+    font-size: .9rem;
+    text-align: center;
+}
+
+
+
+

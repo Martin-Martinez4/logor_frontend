@@ -1,0 +1,21 @@
+
+button.profileName__button{
+
+    height: 1.5rem;
+    width: 3.5rem;
+    padding: 0;
+    margin: 0;
+    margin-top: .5rem;
+    line-height: 1rem;
+    /* background-color: var(--Primary); */
+    font-size: .75rem;
+
+    align-self: flex-start;
+    
+}
+
+.follow-button__container{
+
+    text-align: left;
+}
+

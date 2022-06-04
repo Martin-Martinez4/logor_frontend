@@ -1,0 +1,18 @@
+
+
+.svgCheckMarkIcon {
+    animation: checkMarkFill .75s cubic-bezier(0.1,0.4,1,0.2) 0s;
+}
+
+@keyframes checkMarkFill {
+    0%{fill:var(--UIWhite)}
+    25% {fill:var( --Primary4)}
+    50% {fill:var( --Primary3)}
+    75% {fill:var( --Primary2)}
+    100% {fill:var(--Primary)}
+}
+
+.svgCheckMarkIcon{
+    fill:var(--Primary);
+    transition:fill .75s cubic-bezier(0.1,0.4,1,0.2) 0s;
+}
