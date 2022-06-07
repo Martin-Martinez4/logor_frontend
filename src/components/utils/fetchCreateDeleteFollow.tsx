@@ -1,6 +1,6 @@
 
 // followee = being followed
-export const createFollow = async (followee_id) => {
+export const createFollow = async (followee_id: string) => {
 
     const followResponse = await fetch(`http://localhost:3001/following/create/`, {
 
@@ -22,7 +22,7 @@ export const createFollow = async (followee_id) => {
     return followResponse
 }
 
-export const deleteFollow = async (followee_id) => {
+export const deleteFollow = async (followee_id: string) => {
 
     const followResponse = await fetch(`http://localhost:3001/following/delete/`, {
 

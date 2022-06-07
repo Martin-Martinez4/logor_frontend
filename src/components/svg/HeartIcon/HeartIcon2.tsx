@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useContext, useRef, FC } from 'react';
 
 import "./HeartIcon2.css";
 
@@ -18,11 +18,16 @@ import UserInfoContext from "../../context/UserInfoProvider";
 import LoaderHOC from '../../LoaderHOC/LoaderHOC';
 
 
-export const HeartIcon2 = ({ comment_id }) => {
+type commentId = {
+
+    comment_id: string;
+}
+
+export const HeartIcon2: FC<commentId> = ({ comment_id }) => {
 
     const { toggleModal } = useSigninModal();
 
-    const [likeIsLoading, setLikeIsLoading] = useState();
+    const [likeIsLoading, setLikeIsLoading] = useState<boolean>();
 
     const { auth, setAuth } = useAuth();
 
@@ -35,13 +40,13 @@ export const HeartIcon2 = ({ comment_id }) => {
     }, [loggedInUser])
 
 
-    const loggedInId = loggedInUser.id
+    const loggedInId = loggedInUser?.id
 
     const mountedRef = useRef(true)
 
     const [animateClass, setAnimateClass] = useState(false);
 
-    const [numberOfLikes, setNumberOfLikes] = useState();
+    const [numberOfLikes, setNumberOfLikes] = useState<number | undefined>();
     const [loggedInLiked, setLoggedInLiked] = useState(false);
 
 
@@ -51,7 +56,7 @@ export const HeartIcon2 = ({ comment_id }) => {
 
         try{
 
-            if(await refreshTokenBool(auth, setAuth)){
+            if(await refreshTokenBool(setAuth!)){
 
                 if(loggedInId === undefined){
 
@@ -88,14 +93,14 @@ export const HeartIcon2 = ({ comment_id }) => {
             }
             else{
 
-                toggleModal();
+                toggleModal!();
             }
 
             setLikeIsLoading(false)
         }
         catch{
 
-            toggleModal();
+            toggleModal!();
         }
         finally{
             setLikeIsLoading(false)

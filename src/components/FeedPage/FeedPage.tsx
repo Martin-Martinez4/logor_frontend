@@ -15,20 +15,33 @@ const FeedPage = () => {
 
     const { toggleModal } = useSigninModal();
 
-    const [feedArray, setFeedArray] = useState();
+    const [feedArray, setFeedArray] = useState<JSX.Element[]>();
     
     // eslint-disable-next-line  @typescript-eslint/no-unused-vars
-    const [ postlistLoading, setPostlistLoading ] = useState();
+    const [ postlistLoading, setPostlistLoading ] = useState<boolean>();
 
-    const [seeMoreLoading,  setSeeMoreLoading] = useState();
-
-
-    const [userFeed, setUserFeed] = useState();
+    const [seeMoreLoading,  setSeeMoreLoading] = useState<boolean>();
 
 
-    const [lastFeedShown , setLastFeedShown] = useState(10)
+    const [userFeed, setUserFeed] = useState<JSX.Element[]>();
 
-    const createPosts = (commentsArray) => {
+
+    const [lastFeedShown , setLastFeedShown] = useState<number>(10)
+
+    type PostType = { 
+        comment_id: string; 
+        username: string; 
+        nickname: string; 
+        profile_pic_url: string; 
+        created_at: string; 
+        text_content: string | null; 
+        status: string;
+        likes: string | number;
+    }
+    
+    type PostsArray = PostType[]
+
+    const createPosts = (commentsArray: PostsArray) => {
         
         let posts = []
 
@@ -40,7 +53,7 @@ const FeedPage = () => {
                 
             if(loggedInComments.hasOwnProperty("comment_id")){
 
-                posts.push( <VisitorPost key={comment_id} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} loggedInComments={commentsArray} createPosts={createPosts} posts={posts} status={ status} likes={likes} /> );
+                posts.push( <VisitorPost key={comment_id} comment_id={comment_id} username={username} nickname={nickname} created_at = {created_at} profile_pic_url={profile_pic_url} text_content={text_content === null? "": text_content} status={ status} likes={likes} /> );
 
                 
             }
@@ -90,7 +103,7 @@ const FeedPage = () => {
                 
                 if(error === 403){
 
-                    toggleModal()
+                    toggleModal!()
                 }
 
             })
@@ -120,7 +133,7 @@ const FeedPage = () => {
             setFeedArray(createPosts(comments))
 
 
-            if(lastFeedShown < feedArray?.length ){
+            if(feedArray && lastFeedShown < feedArray?.length ){
                 const increment = 10;
         
                 const lastNewPostIndex = lastFeedShown? lastFeedShown + increment: increment
@@ -169,7 +182,7 @@ const FeedPage = () => {
                 }
 
                 <LoaderHOC loading={seeMoreLoading}>
-                    <div onClick={seeMorePosts}className={lastFeedShown >= feedArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
+                    <div onClick={seeMorePosts}className={feedArray && lastFeedShown >= feedArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
                 </LoaderHOC>
         </>
 

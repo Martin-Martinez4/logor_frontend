@@ -34,7 +34,7 @@ const ContentArea:FC = () => {
     }, [])
     
 
-    miniprofilesArray = createMiniProfiles(suggestedProfiles);
+    miniprofilesArray = createMiniProfiles(suggestedProfiles ? suggestedProfiles : []);
 
     return (
         <div className="contentArea">

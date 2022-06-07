@@ -1,5 +1,5 @@
 
-export const arrayFromObjProp = (objectName, prop) => {
+export const arrayFromObjProp = (objectName: { [key: string]: any }[], prop: string) => {
 
     // console.log("objectProp: ", objectName)
 

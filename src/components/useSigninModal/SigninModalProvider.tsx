@@ -1,11 +1,18 @@
 
-import { createContext, useState } from "react";
+import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 
-const SigninModalContext = createContext(false);
 
-export const SigninModalProvider = ({ children }) => {
+interface SigninModalContext {
+    showModal?: boolean; 
+    toggleModal?: () => void;
+    hideModal?:  () => void;
+}
 
-    const [showModal, setShowModal] = useState(false);
+const SigninModalContext = createContext<SigninModalContext>({});
+
+export const SigninModalProvider: FC = ({ children }) => {
+
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const toggleModal = () => {
 

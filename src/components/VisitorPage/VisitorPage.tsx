@@ -13,9 +13,8 @@ const Homepage:FC = () => {
 
     return(
         <React.Fragment>
-            {console.log(id)}
             <TopBar />
-            <VisitorContentArea userOrTagID={id?.toString()} />
+            <VisitorContentArea userOrTagID={id? id.toString() : ""} />
         </React.Fragment>
     );
 

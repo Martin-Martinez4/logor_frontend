@@ -1,5 +1,5 @@
 
-export const fetchTagNameByComment = async (comment_id) => {
+export const fetchTagNameByComment = async (comment_id: string) => {
     const test = await fetch(`http://localhost:3001/tags/byName/comment/${comment_id}`, {
 
         method: "get",
@@ -15,7 +15,7 @@ export const fetchTagNameByComment = async (comment_id) => {
    
 }
 
-export const fetchMentionsByComment = async (comment_id) => {
+export const fetchMentionsByComment = async (comment_id : string) => {
     const test = await fetch(`http://localhost:3001/mentions/byName/comment/${comment_id}`, {
 
         method: "get",
@@ -36,7 +36,7 @@ export const fetchMentionsByComment = async (comment_id) => {
 }
 
 
-export const insertTagIfNotExist = async (tagname) => {
+export const insertTagIfNotExist = async (tagname: string) => {
 
 
         await fetch('http://localhost:3001/create/tag/', {
@@ -56,7 +56,7 @@ export const insertTagIfNotExist = async (tagname) => {
 }
 
 
-export const insertTagCommentRelation  = async (tagName, comment_id) => {
+export const insertTagCommentRelation  = async (tagName: string, comment_id: string) => {
 
 
         await fetch('http://localhost:3001/comment/addTag/', {
@@ -79,7 +79,7 @@ export const insertTagCommentRelation  = async (tagName, comment_id) => {
 }
 
 
-export const insertMentionRelation  = async (mentioned_nickname, comment_id) => {
+export const insertMentionRelation  = async (mentioned_nickname: string, comment_id:  string) => {
 
 
         await fetch('http://localhost:3001/comment/addMention/', {
@@ -101,7 +101,7 @@ export const insertMentionRelation  = async (mentioned_nickname, comment_id) => 
 
 }
 
-export const deleteTagCommentRelation  = async (tagName, comment_id) => {
+export const deleteTagCommentRelation  = async (tagName: string, comment_id:  string) => {
 
     await fetch('http://localhost:3001/comment/deleteTag/', {
 
@@ -121,7 +121,7 @@ export const deleteTagCommentRelation  = async (tagName, comment_id) => {
         
 }
 
-export const deleteMentionRelation  = async (mentioned_nickname, comment_id) => {
+export const deleteMentionRelation  = async (mentioned_nickname: string, comment_id: string) => {
 
     await fetch('http://localhost:3001/comment/deleteMention/', {
 
@@ -141,7 +141,7 @@ export const deleteMentionRelation  = async (mentioned_nickname, comment_id) => 
         
 }
 
-export const fetchForEachIndexInAnArray = async (array, fetchFunction) => {
+export const fetchForEachIndexInAnArray = async (array: any, fetchFunction: any) => {
 
     const arrLen = array.length;
     
@@ -152,7 +152,7 @@ export const fetchForEachIndexInAnArray = async (array, fetchFunction) => {
 
 }
 
-export const fetchForEachIndexInAnArrayCommentID = async (array, comment_id, fetchFunction) => {
+export const fetchForEachIndexInAnArrayCommentID = async (array: any, comment_id: string, fetchFunction: any) => {
 
     const arrLen = array.length;
     

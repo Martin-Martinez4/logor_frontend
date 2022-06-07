@@ -1,5 +1,5 @@
 
-function formatDate(UTCDate){
+function formatDate(UTCDate: string){
 
     const newDate = new Date(UTCDate);
 
@@ -17,7 +17,7 @@ function formatDate(UTCDate){
 
 };
 
-export function formatDateMonthDayYear(UTCDate){
+export function formatDateMonthDayYear(UTCDate: string){
 
     const newDate = new Date(UTCDate);
 
@@ -33,7 +33,7 @@ export function formatDateMonthDayYear(UTCDate){
 
 };
 
-export function formatDateAgo(UTCDate){
+export function formatDateAgo(UTCDate: any){
 
     const oldTime = (new Date(UTCDate).getTime())/1000;
 

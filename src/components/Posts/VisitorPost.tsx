@@ -23,7 +23,20 @@ import CheckmarkIcon from "../svg/CheckmarkIcon/CheckmarkIcon";
 import ShareIcon2 from "../svg/ShareIcon2/ShareIcon2";
 import ResponsesIcon from "../svg/ResponsesIcon/ResponsesIcon";
 
-const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_content, status }) => {
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes?: string | number;
+}
+
+type PostsArray = PostType[]
+
+const VisitorPost: FC<PostType> = ({ comment_id, username, nickname, profile_pic_url, created_at, text_content, status }) => {
 
     const { showModal, toggleModal } = useModal();
 
@@ -48,14 +61,14 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
         lastEditedReadable = formatDate(postInformation.status[1]);
     }
 
-    const dropdownContainer = React.createRef();
-    const cancelButton = React.createRef();
+    const dropdownContainer = React.createRef<HTMLElement>();
+    const cancelButton = React.createRef<HTMLButtonElement>();
     
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState(false);
 
-    const [replyMode, setReplyMode] = useState();
+    const [replyMode, setReplyMode] = useState<boolean>();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [editMode, setEdiMode] = useState({
@@ -78,7 +91,7 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
  
     useEffect(() => {
 
-        const handleClickOutside = (e) => {
+        const handleClickOutside = (e: any) => {
         
             if (
                 dropdownContainer.current &&
@@ -109,7 +122,7 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
     }, [dropdownVisible, deleteConfirmationVisible, editMode, status,  cancelButton, dropdownContainer]);
 
 
-    let treatedText = useMemo(() => addLinkTags(getTagsMentionsLinks(postInformation.text_content)), [postInformation.text_content])
+    let treatedText = useMemo(() => addLinkTags(getTagsMentionsLinks(postInformation.text_content ? postInformation.text_content : "")), [postInformation.text_content])
 
 
     return(
@@ -142,14 +155,14 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
             :
                 <>
                     <div className="post user_image">
-                        <img src={`${serverAddressString}${user_profile}`} alt="profile" className="post_user_image "></img>
+                        <img src={`${serverAddressString}${profile_pic_url}`} alt="profile" className="post_user_image "></img>
                     
                     </div>
                     <div className="post user_content">
                         <div className="post user_info">
                             <div className="userNameArea">
 
-                                <strong>{userName} </strong>
+                                <strong>{username} </strong>
 
                                 {/* Small Screen option dots */}
                                 <span className="option_dots on_750px" onClick={toggleDropDownVisible} >
@@ -166,9 +179,9 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
                             </div>
                                 <em>{nickname}</em>
                                 <span className="user_info__pipe on_Gthan750px"> | </span>
-                                <em className="datePosted on_Gthan750px"> {formatDateAgo(new Date(new Date(date_posted).toUTCString()).getTime())}</em>
+                                <em className="datePosted on_Gthan750px"> {formatDateAgo(new Date(new Date(created_at).toUTCString()).getTime())}</em>
                                 
-                                <span className="user_info__pipe on_750px"><em className="datePosted"> ○ {formatDateAgo(date_posted)}</em></span>
+                                <span className="user_info__pipe on_750px"><em className="datePosted"> ○ {formatDateAgo(created_at)}</em></span>
                                 
 
                     </div>
@@ -182,7 +195,7 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
                                 ?
                                 <p className="post_body_text">
 
-                                    <CommnetBox parent_id={uuid} toggleFunction={() => toggleReplyMode()}></CommnetBox>
+                                    <CommnetBox parent_id={comment_id} toggleFunction={() => toggleReplyMode()}></CommnetBox>
                                 </p> 
                                 :
                                 ""
@@ -197,9 +210,10 @@ const VisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, 
                                 <div> </div> :
                                 <React.Fragment>
                                 <div className="post__icons">
-                                    <HeartIcon comment_id={uuid} loggedInUserId={loggedInUser.id}></HeartIcon>
+                                    {/* <HeartIcon comment_id={comment_id} loggedInUserId={loggedInUser?.id}></HeartIcon> */}
+                                    <HeartIcon comment_id={comment_id} ></HeartIcon>
                                     <CheckmarkIcon></CheckmarkIcon>
-                                    <ResponsesIcon comment_id={uuid} ></ResponsesIcon>
+                                    <ResponsesIcon comment_id={comment_id} ></ResponsesIcon>
                                     {/* <ShareIcon2></ShareIcon2> */}
                                     {/* <ShareIcon2></ShareIcon2> */}
                                 </div>

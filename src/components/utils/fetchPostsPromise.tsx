@@ -16,7 +16,7 @@ export const getHomePosts = async () => {
 
 }
 
-export const getResponsesPosts = async (parent_id) => {
+export const getResponsesPosts = async (parent_id: string) => {
 
     const promise = await fetch(`http://localhost:3001/responses/${parent_id}`, {
 

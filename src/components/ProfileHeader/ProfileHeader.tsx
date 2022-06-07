@@ -15,6 +15,12 @@ import LocationIcon from "../../assets/LocationIcon.svg"
 import LinkIcon from "../../assets/LinkIcon.svg"
 import CalenderIcon from "../../assets/CalenderIcon.svg"
 
+type visiteeUser = {
+
+    id: string;
+    username: string;
+}
+
 
 const ProfileHeader:FC = () =>{
     
@@ -33,46 +39,46 @@ const ProfileHeader:FC = () =>{
                 <img src={ `${getImageString}${loggedInUser["profile_pic_url"]}` } alt="profile" className="profile_header_image "></img>
             </div> */}
             <div className="profile_header_background" style={{
-                backgroundImage: `url(${serverAddressString}${loggedInUser["header_img_url"]})`,
+                backgroundImage: `url(${serverAddressString}${loggedInUser && loggedInUser["header_img_url"]})`,
                 backgroundRepeat:" no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
             }} >
 
-                <img src={ `${serverAddressString}${loggedInUser["profile_pic_url"]}`} alt="profile" className="profile_header_image "></img>
+                <img src={ `${serverAddressString}${loggedInUser && loggedInUser["profile_pic_url"]}`} alt="profile" className="profile_header_image "></img>
             </div>
 
             <div className="profile_header_container">
 
 
-                <h3 className="profile_name">{loggedInUser["username"]}</h3>
+                <h3 className="profile_name">{loggedInUser && loggedInUser["username"]}</h3>
                 
 
-                <h4 className="profile_tag"><em>{loggedInUser["nickname"]}</em></h4>
-                <p className="profile_description">{loggedInUser["description"]}</p>
+                <h4 className="profile_tag"><em>{loggedInUser && loggedInUser["nickname"]}</em></h4>
+                <p className="profile_description">{loggedInUser && loggedInUser["description"]}</p>
 
                 <div className="profile_other">
-                    {/* <p><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser["location"]}</em></p> */}
+                    {/* <p><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser && loggedInUser["location"]}</em></p> */}
 
 
-                    {loggedInUser["location"] === ""
+                    {loggedInUser && loggedInUser["location"] === ""
                         ?<p></p>
                         : 
-                        <p><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser["location"]}</em></p>
+                        <p><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser && loggedInUser["location"]}</em></p>
                     }
-                    {loggedInUser["links"] === ""
+                    {loggedInUser && loggedInUser["links"] === ""
                         ?<p></p>
                         : 
-                        <p><img src={LinkIcon} alt="profile" className="profile_icon link_icon"></img><a href={loggedInUser["links"]}><em>{loggedInUser["links"]}</em></a></p>
+                        <p><img src={LinkIcon} alt="profile" className="profile_icon link_icon"></img><a href={loggedInUser && loggedInUser["links"]}><em>{loggedInUser && loggedInUser["links"]}</em></a></p>
                     }
 
-                    <p><img src={CalenderIcon} alt="profile" className="profile_icon"></img><em>{formatDateMonthDayYear(loggedInUser["joined_date"])}</em></p>
+                    <p><img src={CalenderIcon} alt="profile" className="profile_icon"></img><em>{formatDateMonthDayYear(loggedInUser ? loggedInUser["joined_date"] : "")}</em></p>
 
                 </div>
 
                 <div className="profile_other profile_following">
                   
-                    <Follow visiteeUser={loggedInUser} buttonClasses={"hidden"} ></Follow>
+                    <Follow visiteeUser={loggedInUser as visiteeUser} buttonClasses={"hidden"} ></Follow>
                 </div>
 
             </div>

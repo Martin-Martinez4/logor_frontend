@@ -11,7 +11,7 @@ export const serverAddressString = "http://localhost:3001"
     //         setPictures(prev => ({...prev, profileImage: profileBlob}))
     //     })(getProfileImage, setPictures)
 
-export const getProfileImageBlob = async (filePath) => {
+export const getProfileImageBlob = async (filePath: string) => {
 
     const image = await fetch(`${getImageString}${filePath}`)
     .then(response => response.blob())

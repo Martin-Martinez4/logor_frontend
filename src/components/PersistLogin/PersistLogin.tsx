@@ -41,7 +41,7 @@ const PersistLogin = () => {
 
                     try{
 
-                        loadUser(user[0]) 
+                        loadUser!(user[0]) 
                         
                         
                     }

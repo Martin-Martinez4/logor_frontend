@@ -1,5 +1,5 @@
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, JSXElementConstructor, useEffect, useState } from "react";
 import MiniProfile from "../MiniProfile/MiniProfile";
 
 import { userSearch, tagSearch } from "../utils/fetchSearchQuery";
@@ -10,6 +10,28 @@ import Scroll from "../Scroll/Scroll";
 
 import "./searchbar.css";
 
+type TagResult =  {
+    tag_name: string,
+    toLink: string
+}[]
+
+// type UsersResult =  {
+//     id: string;
+//     username: string;
+//     nickname: string;
+//     profile_pic_url: string;
+//   }[]
+
+type UsersResult = string[]
+
+
+type ResState = {
+
+    tagsResult: TagResult;
+    usersResult: UsersResult;
+}
+
+
 // Make autocom appear only after something has been typed into the search bar
 
 const SearchBar:FC = () => {
@@ -19,13 +41,13 @@ const SearchBar:FC = () => {
         topBarSearch:""
     });
 
-    const [searchResults, setSearchResults] = useState({
+    const [searchResults, setSearchResults] = useState<ResState>({
 
         tagsResult: [],
         usersResult: []
     })
 
-    const [ autocomIsLoading, setAutocomIsLoading ] = useState();
+    const [ autocomIsLoading, setAutocomIsLoading ] = useState<boolean>();
 
 
     // const [throttle, setThrottle] = useState(false);
@@ -73,12 +95,12 @@ const SearchBar:FC = () => {
 
                     // console.log("sersSearchResults[i][id]: ", usersSearchResults[i]["id"])
 
-                    usersResult.push( usersSearchResults[i]["id"])
+                    usersResult.push(usersSearchResults[i]["id"])
                 }
 
                 for(let i = 0; i < tagsSearchResults.length; i++){
 
-                    const tag_name = tagsSearchResults[i]["tag_name"].substring(1,)
+                    const tag_name: string = tagsSearchResults[i]["tag_name"].substring(1,)
 
                     tagsResult.push( {
                         tag_name: tag_name,
@@ -121,9 +143,13 @@ const SearchBar:FC = () => {
 
                         <LoaderHOC loading={ autocomIsLoading } >
 
-                            {searchResults.usersResult.map((id) => (
-                                <MiniProfile key={`miniProfile${id}`} user_id={id}/>
-                            ))}
+                            console.log(searc)
+
+                            {searchResults.usersResult.map((id) => {
+
+                                console.log({id})
+                                return <MiniProfile key={`miniProfile${id}`} user_id={id}/>
+                            })}
                         </LoaderHOC>
                     </div>
 

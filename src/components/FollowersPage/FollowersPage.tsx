@@ -9,11 +9,24 @@ import { getFollowers, getFollowees } from "../utils/fetchFollowers";
 
 import { FC, useEffect, useState } from "react"
 
-const FollowersPage: FC = ({ user_id }) => {
+type followersFollowees = {
 
-    const [ followersPageIsLoading, setFollowersPageIsLoading ] = useState(false);
+    followers: any[];
+    followees: any[];
 
-    const [ followersFollowees, setFollowersFollowees ] = useState({
+}
+
+type user_id = {
+
+    user_id: string;
+}
+
+// const FollowersPage: FC = ({ user_id }) => {
+const FollowersPage: FC<user_id> = ({ user_id }) => {
+
+    const [ followersPageIsLoading, setFollowersPageIsLoading ] = useState<boolean>(false);
+
+    const [ followersFollowees, setFollowersFollowees ] = useState<followersFollowees>({
 
         followers:[],
         followees:[]

@@ -40,7 +40,7 @@ const Homepage:FC = () => {
                     console.log(user.access_token)
                     // token stuff
     
-                    setAuth({ user_id: user.user_id, access_token:user.access_token });
+                    setAuth!({ user_id: user.user_id, access_token:user.access_token });
     
                   
                         
@@ -66,7 +66,7 @@ const Homepage:FC = () => {
     return(
         <React.Fragment>
             <TopBar />
-            {"test "  + auth.access_token }
+            {"test "  + auth?.access_token }
             <ContentArea />
         </React.Fragment>
     );

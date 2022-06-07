@@ -1,5 +1,5 @@
 
-import React, { FC, useState, useContext } from "react";
+import React, { FC, useState, useContext, Dispatch, SetStateAction } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,16 +13,39 @@ import useSigninModal from "../hooks/useModal";
 import { tagsMentionsCreate } from "../utils/tagMentions";
 import UserInfoContext from "../context/UserInfoProvider";
 
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes: string | number;
+}
+
+type PostsArray = PostType[]
+
+type CreatePostsProp = ((commentsArray: PostsArray, allComments?: any) => JSX.Element[]) | ((commentsArray: PostsArray,  allComments?: any) => Element[])
+
+type CommentBoxProps = { 
+    createPosts?: CreatePostsProp; 
+    setPostsArray?:any | Dispatch<SetStateAction<JSX.Element[] | undefined>>; 
+    postListFetchFunction?: () => Promise<any>; 
+    parent_id: string; 
+    toggleFunction?: () => void;
+}
 
 
-const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_id, toggleFunction}) => {
+const PostBox:FC<CommentBoxProps> = ({ createPosts, setPostsArray, postListFetchFunction, parent_id, toggleFunction}) => {
 
     const { loggedInUser } = useContext( UserInfoContext);
 
-    const [buttonLoading ,setButtonLoading] = useState()
+    const [buttonLoading ,setButtonLoading] = useState<boolean>()
 
 
-    const {id}: {id:string; profile_pic_url:string } = loggedInUser;
+    const id = loggedInUser?.id;
+
 
     const maxChars = 920;
 
@@ -36,7 +59,7 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
 
     const [charsLeft, setCharsLeft] = useState(maxChars)
 
-    const oninputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const oninputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 
         e.preventDefault()
         
@@ -52,28 +75,30 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
 
     }
 
-    const handleKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleKeyDown =  (e: React.KeyboardEvent<HTMLTextAreaElement>)  => {
+
+        const target = (e.target as HTMLInputElement);
 
         if (e.key === "Tab") {
             e.preventDefault();
 
-            let tabAdded = e.target.value + "\t"; 
+            let tabAdded = target.value + "\t"; 
 
-            setNewPost(prev => ({ ...prev, [e.target.name]: tabAdded }))
+            setNewPost(prev => ({ ...prev, [target.name]: tabAdded }))
         
           }
 
         if (e.key === "Enter") {
             e.preventDefault();
 
-            let tabAdded = e.target.value + "\n"; 
+            let tabAdded = target.value + "\n"; 
 
-            setNewPost(prev => ({ ...prev, [e.target.name]: tabAdded }))
+            setNewPost(prev => ({ ...prev, [target.name]: tabAdded }))
         
           }
     }
 
-    const clearInput = (targetName, setFunction) => {
+    const clearInput = (targetName: string, setFunction: (x: { [x: string]: string; }) => {}) => {
 
         setFunction({[targetName]:""})
     }
@@ -113,7 +138,7 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
             
             tagsMentionsCreate(comment_id, newPost["commentBox"])
 
-            clearInput("commentBox", setNewPost);
+            clearInput("commentBox", setNewPost as (x: { [x: string]: string; }) => {});
             
             setCharsLeft(maxChars);
 
@@ -122,10 +147,11 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
             if(postListFetchFunction){
 
                 return postListFetchFunction()
-                .then((com) => {
-                    setPostsArray(createPosts(com))
+                .then((com: PostsArray) => {
+
+                        setPostsArray(createPosts!(com))
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     console.error(err);
     
                 })
@@ -142,7 +168,7 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
             setButtonLoading(false)
 
             console.log("error")
-            toggleModal()
+            toggleModal!()
             console.error(error);
 
         });
@@ -157,7 +183,7 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
 
         setButtonLoading(true)
 
-        clearInput("commentBox", setNewPost);
+        clearInput("commentBox", setNewPost as (x: { [x: string]: string; }) => {});
         setCharsLeft(maxChars);
 
         if(toggleFunction){
@@ -176,7 +202,7 @@ const PostBox:FC = ({ createPosts, setPostsArray, postListFetchFunction, parent_
         <Card classes="content content__commentBox">
 
 
-            <textarea id="commentBox" name="commentBox" value={newPost.commentBox} onChange={oninputChange} onKeyDown={handleKeyDown} className="commentBox__commentInput" placeholder="Have something to say?" maxLength={maxChars} cols={92} rows={10}></textarea>
+            <textarea id="commentBox" name="commentBox" value={newPost.commentBox} onChange={oninputChange} onKeyDown={() => handleKeyDown} className="commentBox__commentInput" placeholder="Have something to say?" maxLength={maxChars} cols={92} rows={10}></textarea>
 
             <div className="commentBox__buttonArea">
                 

@@ -17,31 +17,45 @@ import LeftsideCard from "../LeftsideCard/LeftsideCard";
 import VisitorPost from "../Posts/VisitorPost";
 import RecursiveVisitorPost from "../Posts/RecursiveVisitorPost";
 
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes: string | number;
+}
+
+type PostsArray = PostType[]
+
+
 const ThreadView = () => {
 
     const { comment_id } = useParams();
 
-    const [headerComment, setHeaderComment] = useState()
+    const [headerComment, setHeaderComment] = useState<JSX.Element[]>()
 
     // const [postsArray, setPostsArray] = useState();
-    const [responsesArray, setResponsesArray] = useState();
+    const [responsesArray, setResponsesArray] = useState<JSX.Element[]>();
  
-    const [ suggestedProfiles, setSuggestedProfiles ] = useState();
+    const [suggestedProfiles, setSuggestedProfiles ] = useState<{ [key: string]: string; }[]>();
     const [lastResponseShown , setLastResponseShown] = useState(10)
-    const [userResponses, setUserResponses] = useState();
+    const [userResponses, setUserResponses] = useState<JSX.Element[]>();
 
-    const [ postlistLoading, setPostlistLoading ] = useState();
+    const [ postlistLoading, setPostlistLoading ] = useState<boolean>();
 
     const [seeMoreLoading, setSeeMoreLoading] = useState();
 
-    const [allComments, setAllComments] = useState();
+    const [allComments, setAllComments] = useState<any>();
     
     
     // eslint-disable-next-line
     const { loggedInUser } = useContext( UserInfoContext);
 
     // Get user comments
-    const createPosts = (commentsArray, allComments) => {
+    const createPosts = (commentsArray: PostsArray, allComments: any) => {
         
         let posts = []
 
@@ -53,7 +67,7 @@ const ThreadView = () => {
                 
             if(loggedInComments.hasOwnProperty("comment_id")){
 
-                posts.push( <RecursiveVisitorPost key={`post_${comment_id}`} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} userPosts={userResponses} setUserPosts={setUserResponses} loggedInComments={responsesArray} status={status} likes={likes} allComments={allComments} padding={0}/> );
+                posts.push( <RecursiveVisitorPost key={`post_${comment_id}`} comment_id={comment_id} username={username} nickname={nickname} created_at = {created_at} user_profile={profile_pic_url} text_content={text_content === null? "": text_content}  status={status} likes={likes} allComments={allComments} padding={0}/> );
 
                 
             }
@@ -66,7 +80,7 @@ const ThreadView = () => {
 
     useEffect(() => {
 
-        const makePostlist = async (allComments) => {
+        const makePostlist = async (allComments: any) => {
 
             await fetch(`http://localhost:3001/responses/${comment_id}`, {
                         method: "get",
@@ -128,14 +142,14 @@ const ThreadView = () => {
         setInitPosts()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loggedInUser.id, comment_id])
+    }, [loggedInUser?.id, comment_id])
 
  
 
 
     useEffect(() => {
 
-        const getPostInformation = async (comment_id) => {
+        const getPostInformation = async (comment_id: string) => {
     
             // uuid, userName, nickname, user_profile, date_posted, text_content, status
             // /post/:id
@@ -154,7 +168,7 @@ const ThreadView = () => {
                 const {comment_id, text_content, created_at, status, likes, username, nickname, profile_pic_url} = comments[0];
     
                 setHeaderComment(
-                    [<VisitorPost key={comment_id} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} status={ status} likes={likes} /> ]
+                    [<VisitorPost key={comment_id} comment_id={comment_id} username={username} nickname={nickname} created_at = {created_at} profile_pic_url={profile_pic_url} text_content={text_content === null? "": text_content} status={ status} likes={likes} /> ]
                 );
     
                 
@@ -163,8 +177,14 @@ const ThreadView = () => {
     
         }
         
+        if(comment_id === undefined){
 
-        getPostInformation(comment_id)
+            getPostInformation("")
+        }else{
+
+            getPostInformation(comment_id)
+        }
+        
 
     }, [comment_id])
 
@@ -188,8 +208,8 @@ const ThreadView = () => {
         
     }, [])
  
-
-    miniprofilesArray = createMiniProfiles(suggestedProfiles);
+    
+    miniprofilesArray = createMiniProfiles(suggestedProfiles? suggestedProfiles : []);
 
     return(
 
@@ -217,7 +237,7 @@ const ThreadView = () => {
             </div>
 
             <Card classes="h_auto content profile_header">
-            <CommnetBox createPosts={createPosts} setPostsArray={setResponsesArray} postListFetchFunction={() => getResponsesPosts(comment_id)} parent_id={comment_id}></CommnetBox>
+            <CommnetBox createPosts={createPosts} setPostsArray={setResponsesArray} postListFetchFunction={() => getResponsesPosts(comment_id ? comment_id : "")} parent_id={comment_id? comment_id : ""}></CommnetBox>
                 </Card>
                     
                 <Card classes="content med_suggestion">

@@ -1,5 +1,5 @@
 
-export const getRandomUserIDs = async (number) => {
+export const getRandomUserIDs = async (number: number) => {
 
     const userIDs = await fetch(`http://localhost:3001/users/info/random/${number}`, {
 

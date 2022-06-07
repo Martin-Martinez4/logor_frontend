@@ -20,7 +20,7 @@ import {
     fetchForEachIndexInAnArrayCommentID 
 } from "./fetchTagsMentions";
 
-export const tagsMentionsEdit = async (comment_id, new_text) => {
+export const tagsMentionsEdit = async (comment_id: string, new_text: string) => {
 
     let oldTagsNameObject = await fetchTagNameByComment(comment_id)
     let oldMentionsNameObject = await fetchMentionsByComment(comment_id)
@@ -57,7 +57,7 @@ export const tagsMentionsEdit = async (comment_id, new_text) => {
 
 }
 
-export const tagsMentionsCreate = async (comment_id, new_text) => {
+export const tagsMentionsCreate = async (comment_id: string, new_text: string) => {
 
     let newTagsArrays = await getTags(new_text)
     let newMentionsArrays = await getMentions(new_text)

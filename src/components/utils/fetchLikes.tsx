@@ -1,5 +1,5 @@
 
-export const getLikesCount = async (comment_id) => {
+export const getLikesCount = async (comment_id: string) => {
 
     const count = await fetch(`http://localhost:3001/comment/count/likes/${comment_id}`, {
 
@@ -20,7 +20,7 @@ export const getLikesCount = async (comment_id) => {
 
 }
 
-export const userLiked = async (comment_id ) => {
+export const userLiked = async (comment_id: string ) => {
 
     
 
@@ -55,7 +55,7 @@ export const userLiked = async (comment_id ) => {
 
 }
 
-export const createLike = async (comment_id) => {
+export const createLike = async (comment_id: string) => {
 
     const response = await fetch(`http://localhost:3001/comment/add/like/`, {
 
@@ -82,7 +82,7 @@ export const createLike = async (comment_id) => {
 
 }
 
-export const deleteLike = async (comment_id ) => {
+export const deleteLike = async (comment_id: string ) => {
 
     const response = await fetch(`http://localhost:3001/comment/delete/like/`, {
 

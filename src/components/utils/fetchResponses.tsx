@@ -1,5 +1,5 @@
 
-export const getRespones = async (comment_id) => {
+export const getRespones = async (comment_id: string) => {
 
     const responsesComments = await fetch(`http://localhost:3001/responses/${comment_id}`, {
 
@@ -19,7 +19,7 @@ export const getRespones = async (comment_id) => {
     return responsesComments
 
 }
-export const getResponsesCount = async (comment_id) => {
+export const getResponsesCount = async (comment_id: string) => {
 
     const responsesCount = await fetch(`http://localhost:3001/responses/count/${comment_id}`, {
 
@@ -40,7 +40,7 @@ export const getResponsesCount = async (comment_id) => {
 
 }
 
-export const addResponse = async (parent_id, comment_id) => {
+export const addResponse = async (parent_id: string, comment_id: string) => {
 
     const response = await fetch(`http://localhost:3001/thread/add/response/`, {
 

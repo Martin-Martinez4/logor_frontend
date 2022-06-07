@@ -1,12 +1,17 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import LoaderHOC from "../../LoaderHOC/LoaderHOC"
 import { formatNumber } from "../../utils/formatNumber";
 import { getResponsesCount } from "../../utils/fetchResponses"
 import "./ResponsesIcon.css";
 
-const ResponsesIcon = ({ comment_id }) =>  {
+type commentId = {
+
+    comment_id: string;
+}
+
+const ResponsesIcon: FC<commentId> = ({ comment_id }) =>  {
 
     const navigate  = useNavigate();
 
@@ -20,7 +25,7 @@ const ResponsesIcon = ({ comment_id }) =>  {
 
         let isMounted = true; 
 
-        const functionThatRuns = async (parent_id) => {
+        const functionThatRuns = async (parent_id:string) => {
 
             const numResponses = await getResponsesCount(parent_id);
 

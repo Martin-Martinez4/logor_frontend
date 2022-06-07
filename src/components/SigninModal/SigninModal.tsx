@@ -1,10 +1,17 @@
 
-import React from "react";
+import React, { FC, MouseEventHandler } from "react";
 import Signin from "../Siginin/Signin";
 
 import "./modal.css";
 
-const  SigininModal = ({ showModal, hide, children }) => {
+type ShowModalProps = {
+
+  showModal: boolean | undefined;
+  hide: MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+
+const  SigininModal: FC<ShowModalProps> = ({ showModal, hide, children }) => {
 
   return (
     

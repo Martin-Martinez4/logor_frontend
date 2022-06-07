@@ -1,5 +1,10 @@
 
-export const formatNumber = (number:number) => {
+export const formatNumber = (number:number | undefined): string => {
+
+    if(number === undefined){
+
+        return "N/A";
+    }
 
     if (number < 1000){
 

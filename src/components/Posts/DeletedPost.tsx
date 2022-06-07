@@ -5,7 +5,7 @@ import { FC } from "react";
 import Card from "../Card/Card";
 import "./Posts.css";
 
-const DeletedPost: FC = ({ uuid }) => {
+const DeletedPost: FC = () => {
  
 
         return(

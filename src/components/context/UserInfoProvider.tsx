@@ -1,17 +1,39 @@
 
-import  { createContext, useState } from  "react";
+import  { createContext, Dispatch, FC, SetStateAction, useState } from  "react";
 
 import { getFollowersCount, getFollowingCount } from "../utils/fetchFollowers";
 
-const UserInfoContext = createContext({});
+interface UserInformation {
+    id: string;
+    username: string;
+    joined_date: string;
+    nickname: string;
+    profile_pic_url: string;
+    description: string;
+    header_img_url: string;
+    location: string;
+    links: string;
+    followers: string;
+    following: string;
 
-export const UserInfoProvider = ({ children }) => {
+}
 
-    const [loggedInUser, setloggedInUser] = useState({
+interface UserInfoContext {
+    loggedInUser?: UserInformation; 
+    setloggedInUser?: Dispatch<SetStateAction<UserInformation>>; 
+    loadUser?: (data: UserInformation) => Promise<void>;
+    unloadUser?: () => void;
+}
+
+const UserInfoContext = createContext<UserInfoContext>({});
+
+export const UserInfoProvider:FC = ({ children }) => {
+
+    const [loggedInUser, setloggedInUser] = useState<UserInformation>({
         id:"",
         username:"",
         joined_date:"",
-        tag:"",
+        nickname:"",
         profile_pic_url:"",
         description:"",
         header_img_url:"",
@@ -21,7 +43,7 @@ export const UserInfoProvider = ({ children }) => {
         following:""
     });
 
-    const loadUser = async (data) => {
+    const loadUser = async (data: UserInformation) => {
 
         // const [id, username, joined, nickname, profile_pic_url, description, header_img_url, location, links] = data;
 
@@ -74,6 +96,8 @@ export const UserInfoProvider = ({ children }) => {
 
 
     }
+
+
 
 
   

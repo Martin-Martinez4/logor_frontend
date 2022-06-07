@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import UserInfoContext from "../context/UserInfoProvider";
 import { serverAddressString } from "../utils/exportGetImage"; 
 
@@ -34,15 +34,16 @@ const EditProfile = () => {
     const Monkey3 = "../../users/default/Monkey_3.svg";
     const Monkey4 = "../../users/default/Monkey_4.svg";
 
-    const usernameErrorMessage = "Username must be at least 4 cahracters long and only contain letters numbers and -._"
-    const usernameAvailableMessage = "Username has been taken"
-    const nicknameErrorMessage = "Nickname must be at least 4 cahracters long and only contain letters numbers and -._"
-    const nicknameAvailableMessage = "Nickname has been taken"
+    const usernameErrorMessage: string = "Username must be at least 4 cahracters long and only contain letters numbers and -._"
+    const usernameAvailableMessage: string = "Username has been taken"
+    const nicknameErrorMessage: string = "Nickname must be at least 4 cahracters long and only contain letters numbers and -._"
+    const nicknameAvailableMessage: string = "Nickname has been taken"
     
-    const [usernameValid, setUsernameValid] = useState();
-    const [nicknameValid, setNicknameValid] = useState();
+    const [usernameValid, setUsernameValid] = useState<string>();
+    const [nicknameValid, setNicknameValid] = useState<string>();
  
     const { loggedInUser } = useContext(UserInfoContext);
+    
 
     const [user, setUser] = useState({
 
@@ -75,7 +76,7 @@ const EditProfile = () => {
         alt: 'Upload an Image'
     });
 
-    const[ buttonPressedLoading, setButtonPressedLaoding  ] = useState(false)
+    const[ buttonPressedLoading, setButtonPressedLaoding  ] = useState<boolean>(false)
 
     const[editState, setEditState] = useState({
 
@@ -88,7 +89,20 @@ const EditProfile = () => {
         editLinks: false
     })
 
-    const [previewBlobs, setPreviewBlobs] = useState({})
+    type mediaProps = {
+        src: string;
+        alt: string;
+    }
+
+    type PreviewBlobs = {
+
+        profile_pic_url?: mediaProps;
+        header_img_url?: mediaProps;
+
+
+    }
+
+    const [previewBlobs, setPreviewBlobs] = useState<PreviewBlobs>({})
 
     const oninputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -132,7 +146,12 @@ const EditProfile = () => {
 
         const { src } = e.currentTarget;
 
-        const pictureType = el.getAttribute("pic-type")
+        const pictureType: string | null  = el?.getAttribute("pic-type") ? el?.getAttribute("pic-type") : null ;
+
+        if(pictureType === null){
+
+            return
+        }
 
         setPreviewBlobs(prev => ({ ...prev, [pictureType]:{
             src: src,
@@ -145,7 +164,7 @@ const EditProfile = () => {
         e.preventDefault()
     }
 
-    const validateOnBlur = async (e, validateFunciton, setFunction, errorMessage, checkIfAvailable=false, ifAvailableFunction=returnFalse) => {
+    const validateOnBlur = async (e: React.FocusEvent<HTMLInputElement, Element>, validateFunciton: ((a: string) => boolean), setFunction: Dispatch<SetStateAction<string | undefined>>, errorMessage: string, checkIfAvailable: boolean = false, ifAvailableFunction: ((nickname: string) => Promise<any>)) => {
 
         e?.preventDefault()
 
@@ -167,14 +186,14 @@ const EditProfile = () => {
                 }
                 else{
                     
-                    setFunction()
+                    setFunction("")
                 }
 
 
                 return
             }
 
-            setFunction()
+            setFunction("")
 
 
             return
@@ -182,7 +201,7 @@ const EditProfile = () => {
 
     }
 
-    const validateInput = (e, validateFunciton, setFunction, errorMessage) => {
+    const validateInput = (e: React.ChangeEvent<HTMLInputElement>, validateFunciton: ((a: string) => boolean), setFunction: Dispatch<SetStateAction<string | undefined>>, errorMessage :string) => {
 
         e?.preventDefault()
         
@@ -193,7 +212,7 @@ const EditProfile = () => {
         }
         else{
 
-            setFunction()
+            setFunction("")
 
         }
 
@@ -202,7 +221,7 @@ const EditProfile = () => {
 
     }
 
-    const toggleEditMode = (stateName, stateValue, setStateFunction) => {
+    const toggleEditMode = (stateName: string, stateValue: boolean, setStateFunction: (x: (prev: any) => any) => void) => {
 
         // console.log(stateValue)
 
@@ -211,8 +230,18 @@ const EditProfile = () => {
 
     }
 
+    type modalState = {
+        editHeader: boolean;
+        editProfile: boolean;
+        editUsername: boolean;
+        editNickname: boolean;
+        editDescription: boolean;
+        editLocation: boolean;
+        editLinks: boolean;
+    }
+
     // Sets all editStates to false, which closes the view
-    const closeAll = (e, stateObject, setFunction) => {
+    const closeAll = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, stateObject: modalState, setFunction: (x: (prev: any) => any) => void) => {
 
         e?.preventDefault()
 
@@ -669,7 +698,7 @@ const EditProfile = () => {
                 </>
                 : 
                 <div onClick={() => toggleEditMode("editHeader",editHeader, setEditState)} className="profile_header_background pointer onHover_border--Primary" style={{
-                    backgroundImage: `url(${serverAddressString}${loggedInUser["header_img_url"]})`,
+                    backgroundImage: `url(${serverAddressString}${loggedInUser? loggedInUser["header_img_url"] : ""})`,
                     backgroundRepeat:" no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "center"
@@ -743,7 +772,7 @@ const EditProfile = () => {
                     </div>
                 </>
                 :
-                <img src={ `${serverAddressString}${loggedInUser["profile_pic_url"]}`}  onClick={() => toggleEditMode("editProfile",editProfile, setEditState)} alt="profile" className="profile_header_image pointer onHover_border--Primary" style={{marginTop:"1rem"}}></img>
+                <img src={ `${serverAddressString}${loggedInUser? loggedInUser["profile_pic_url"] : ""}`}  onClick={() => toggleEditMode("editProfile",editProfile, setEditState)} alt="profile" className="profile_header_image pointer onHover_border--Primary" style={{marginTop:"1rem"}}></img>
             }
 
             <div className="profile_header_container padding-bottom__8rem">
@@ -776,7 +805,7 @@ const EditProfile = () => {
 
                 </div>
                 :
-                <h3 className="profile_name pointer onHover_border--Primary" onClick={() => toggleEditMode("editUsername", editUsername, setEditState)}>{loggedInUser["username"]}</h3>
+                <h3 className="profile_name pointer onHover_border--Primary" onClick={() => toggleEditMode("editUsername", editUsername, setEditState)}>{loggedInUser? loggedInUser["username"] : ""}</h3>
                 }
 
                 {editNickname
@@ -806,7 +835,7 @@ const EditProfile = () => {
                         </div>
                     </div>
                 :
-                <h4 className="profile_tag pointer onHover_border--Primary" onClick={() => toggleEditMode("editNickname", editNickname, setEditState)}><em>{loggedInUser["nickname"]}</em></h4>
+                <h4 className="profile_tag pointer onHover_border--Primary" onClick={() => toggleEditMode("editNickname", editNickname, setEditState)}><em>{loggedInUser? loggedInUser["nickname"]: ""}</em></h4>
 
                 }
 
@@ -834,7 +863,7 @@ const EditProfile = () => {
                         </div>
                     </div>
                     :
-                    <p className="profile_description pointer onHover_border--Primary"  onClick={() => toggleEditMode("editDescription", editDescription, setEditState)}>{loggedInUser["description"]}</p>
+                    <p className="profile_description pointer onHover_border--Primary"  onClick={() => toggleEditMode("editDescription", editDescription, setEditState)}>{loggedInUser? loggedInUser["description"]: ""}</p>
 
                 }
 
@@ -863,7 +892,7 @@ const EditProfile = () => {
 
                   
                         :
-                        <p className="pointer onHover_border--Primary" onClick={() => toggleEditMode("editLocation", editLocation, setEditState)}><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser["location"]}</em></p>
+                        <p className="pointer onHover_border--Primary" onClick={() => toggleEditMode("editLocation", editLocation, setEditState)}><img src={LocationIcon} alt="profile" className="profile_icon location_icon"></img> <em>{loggedInUser? loggedInUser["location"] : ""}</em></p>
                     }
 
                     {
@@ -889,7 +918,7 @@ const EditProfile = () => {
                             </div>
                         </div>
                         :
-                        <p className="pointer onHover_border--Primary"  onClick={() => toggleEditMode("editLinks", editLinks, setEditState)}><img src={LinkIcon} alt="profile" className="profile_icon link_icon"></img><span><em>{loggedInUser["links"]}</em></span></p>
+                        <p className="pointer onHover_border--Primary"  onClick={() => toggleEditMode("editLinks", editLinks, setEditState)}><img src={LinkIcon} alt="profile" className="profile_icon link_icon"></img><span><em>{loggedInUser? loggedInUser["links"]: ""}</em></span></p>
                     }
 
 

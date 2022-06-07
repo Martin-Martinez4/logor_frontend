@@ -1,5 +1,5 @@
 
-const getTags = (text_string) => {
+const getTags = (text_string: string) => {
 
     if(text_string === null || text_string === undefined){
         text_string = "";

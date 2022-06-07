@@ -1,0 +1,84 @@
+
+--- Long Term 
+
+    - Finish most of frontend
+    - implement Jest tests
+
+    - API, test with postman and JSON server
+    - PSQL to hold user and login information, user should have UID
+    - Redis database to implement sessions
+
+    - Edit user database to handle posts, lists, favorites
+        - idea posts post should have: 
+            a UID (pointer), 
+            timestamp (when the post was made), 
+            owner, 
+            text/content, 
+            number of favorites and who favorited,
+            refernce UID of posts in response 
+
+    - Figure out Neo4j for node based relationships between users
+    - K cluster for reccomendations? Sounds hard
+
+-- Short term
+
+    []- Finish register and success pages
+        []- ipad pro can look better
+            []- Specific media queries for it
+            []-ipad pro 1024 X 1366
+                - potrait mode needs work (progress bar, input boxes, card sizes,  etc)
+                /* ----------- iPad Pro ----------- */
+                    /* Portrait and Landscape */
+                    @media only screen 
+                    and (min-width: 1024px) 
+                    and (max-height: 1366px) 
+                    and (-webkit-min-device-pixel-ratio: 1.5) {
+                    }
+
+                    /* Portrait */
+                    @media only screen 
+                    and (min-width: 1024px) 
+                    and (max-height: 1366px) 
+                    and (orientation: portrait) 
+                    and (-webkit-min-device-pixel-ratio: 1.5) {
+                    }
+
+                    /* Landscape */
+                    @media only screen 
+                    and (min-width: 1024px) 
+                    and (max-height: 1366px) 
+                    and (orientation: landscape) 
+                    and (-webkit-min-device-pixel-ratio: 1.5) {
+
+                    }
+        [X]- Media queries for mobile view and low tier mobile internet connection (lower res image, etc)
+
+            [X]- Remove justify center from jiro phone iphone4 (320 x 480)
+            [X]- Add event listener for screen resize in register,js
+            [X]- profile picture picker needs to be made more responsive (potrait mode on smaller screens needs work)
+                - Ipad mini landscape mode
+
+            [X]- Smaller screens (768 width ipad)
+                - change input height to 1.75rem
+            
+            [X]- post card and sidecards need width and height
+        [X]- success page needs to be responsive on smaller screens
+            [X]- Smaller version of success SVG for width 350
+            [X]- Ipd pro bigger text and SVG
+        [X]- success page should redirect ot home page or possibly loading page after a few seconds
+    
+    [X]- Try to convert code to typescript
+
+    - home page
+        - Make loading screen
+
+        - Post and Sidebar components need to be styled
+        - Make header (place for profile image, description, etc ) component
+        - Make createpost component
+
+        - Make logged in top bar
+        - Make post view component page (when you click a post, should show responses)
+        - Other User's profiles
+
+    - Plan api and database structure
+

@@ -23,13 +23,40 @@ import CheckmarkIcon from "../svg/CheckmarkIcon/CheckmarkIcon";
 import ShareIcon2 from "../svg/ShareIcon2/ShareIcon2";
 import ResponsesIcon from "../svg/ResponsesIcon/ResponsesIcon";
 
-const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_content, status, allComments, padding }) => {
+type allComments = {
 
-    console.log({allComments}) 
+    comment_id: string;
+    created_at: string;
+    id: string;
+    likes: string | number | undefined;
+    nickname: string;
+    parent_id: string;
+    profile_pic_url: string;
+    // status: (2) ['', '']
+    status: string;
+    text_content: string;
+    user_id: string;
+    username:string;
+}
 
-    let childComments = () => allComments? allComments.filter(c => c.parent_id === uuid) : [];
+type RecursiveVisitorPost = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    user_profile: string; 
+    created_at: string; 
+    text_content: string; 
+    status: string; 
+    allComments: allComments[]; 
+    padding: number; 
+    likes: string | number | undefined;
+}
 
-    const [childReplies, setChildReplies] = useState();
+const RecursiveVisitorPost: FC<RecursiveVisitorPost> = ({ comment_id, username, nickname, user_profile, created_at, text_content, status, allComments, padding }) => {
+
+    let childComments = () => allComments? allComments.filter(c => c.parent_id === comment_id) : [];
+
+    const [childReplies, setChildReplies] = useState<JSX.Element[]>();
 
     const [seeMore, setSeeMore] = useState(false);
 
@@ -56,14 +83,14 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
         lastEditedReadable = formatDate(postInformation.status[1]);
     }
 
-    const dropdownContainer = React.createRef();
-    const cancelButton = React.createRef();
+    const dropdownContainer = React.createRef<HTMLElement>();
+    const cancelButton = React.createRef<HTMLButtonElement>();
     
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState(false);
 
-    const [replyMode, setReplyMode] = useState();
+    const [replyMode, setReplyMode] = useState<boolean>();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [editMode, setEdiMode] = useState({
@@ -91,7 +118,7 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
  
     useEffect(() => {
 
-        const handleClickOutside = (e) => {
+        const handleClickOutside = (e: any) => {
         
             if (
                 dropdownContainer.current &&
@@ -127,7 +154,7 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
             childComments().map(c => (
                             
             
-                <RecursiveVisitorPost key={`post_${c.comment_id}`} uuid={c.comment_id} userName={c.username} nickname={c.nickname} date_posted = {c.created_at} user_profile={c.profile_pic_url} text_content={c.text_content === null? 0: c.text_content} status={c.status} likes={c.likes} allComments={allComments} padding={padding <= .8? padding +.05 : 0} />
+                <RecursiveVisitorPost key={`post_${c.comment_id}`} comment_id={c.comment_id} username={c.username} nickname={c.nickname} created_at = {c.created_at} user_profile={c.profile_pic_url} text_content={c.text_content === null? "": c.text_content} status={c.status} likes={c.likes} allComments={allComments} padding={padding <= .8? padding +.05 : 0} />
                 
                 
                 ))
@@ -180,7 +207,7 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
                         <div className="post user_info">
                             <div className="userNameArea">
 
-                                <strong>{userName} </strong>
+                                <strong>{username} </strong>
 
                                 {/* Small Screen option dots */}
                                 <span className="option_dots on_750px" onClick={toggleDropDownVisible} >
@@ -197,9 +224,9 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
                             </div>
                                 <em>{nickname}</em>
                                 <span className="user_info__pipe on_Gthan750px"> | </span>
-                                <em className="datePosted on_Gthan750px"> {formatDateAgo(new Date(new Date(date_posted).toUTCString()).getTime())}</em>
+                                <em className="datePosted on_Gthan750px"> {formatDateAgo(new Date(new Date(created_at).toUTCString()).getTime())}</em>
                                 
-                                <span className="user_info__pipe on_750px"><em className="datePosted"> ○ {formatDateAgo(date_posted)}</em></span>
+                                <span className="user_info__pipe on_750px"><em className="datePosted"> ○ {formatDateAgo(created_at)}</em></span>
                                 
 
                     </div>
@@ -213,7 +240,7 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
                                 ?
                                 <p className="post_body_text">
 
-                                    <CommnetBox parent_id={uuid} toggleFunction={() => toggleReplyMode()}></CommnetBox>
+                                    <CommnetBox parent_id={comment_id} toggleFunction={() => toggleReplyMode()}></CommnetBox>
                                 </p> 
                                 :
                                 ""
@@ -228,9 +255,9 @@ const RecursiveVisitorPost: FC = ({ uuid, userName, nickname, user_profile, date
                                 <div> </div> :
                                 <React.Fragment>
                                 <div className="post__icons">
-                                    <HeartIcon comment_id={uuid} loggedInUserId={loggedInUser.id}></HeartIcon>
+                                    <HeartIcon comment_id={comment_id} ></HeartIcon>
                                     <CheckmarkIcon></CheckmarkIcon>
-                                    <ResponsesIcon comment_id={uuid} ></ResponsesIcon>
+                                    <ResponsesIcon comment_id={comment_id} ></ResponsesIcon>
                                     {/* <ShareIcon2></ShareIcon2> */}
                                     {/* <ShareIcon2></ShareIcon2> */}
                                 </div>

@@ -1,9 +1,10 @@
 
+import { FC } from "react";
 import SigininModal from "../SigninModal/SigninModal";
 import useSigninModal from "../hooks/useModal";
 
 
-const SigninModalHOC = ({ children }) => {
+const SigninModalHOC: FC = ({ children }) => {
 
     const { showModal, toggleModal } = useSigninModal();
 

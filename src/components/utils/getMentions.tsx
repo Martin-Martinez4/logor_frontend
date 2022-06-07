@@ -1,5 +1,5 @@
 
-const getMentions = (text_string) => {
+const getMentions = (text_string: string) => {
 
     if(text_string === null || text_string === undefined){
         text_string = "";

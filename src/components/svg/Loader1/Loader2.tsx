@@ -1,7 +1,8 @@
 
+import { FC, ReactElement, ReactNode } from "react";
 import "./Loader1.css";
 
-const Loader1 = () => {
+const Loader1: FC = (): ReactElement<any, any> | null => {
 
     return(
         // <div className="loader_container">

@@ -9,7 +9,7 @@ import "./Nav.css";
 
 const TopBar: FC = () => {
 
-    const dropdownContainer = createRef()
+    const dropdownContainer = createRef<HTMLInputElement>()
     
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -29,14 +29,15 @@ const TopBar: FC = () => {
             
     useEffect(() => {
 
-        const handleClickOutside = (e) => {
-        
+        const handleClickOutside = (e: any ) => {
+
             if (
                 dropdownContainer.current &&
                 !dropdownContainer?.current?.contains(e.target)
                 ) {
                     setDropdownVisible(false);
                 }
+        
                 
                       
         };

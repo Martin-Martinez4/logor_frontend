@@ -1,5 +1,5 @@
 
-export const flattenSimpleArray = (arrayName) => {
+export const flattenSimpleArray = (arrayName: any[]) => {
 
    return arrayName.map((array) => {
 

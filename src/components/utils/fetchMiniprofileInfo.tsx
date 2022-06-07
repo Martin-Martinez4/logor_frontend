@@ -1,5 +1,5 @@
 
-export const getMiniProfileInfo = async (user_id) => {
+export const getMiniProfileInfo = async (user_id: string) => {
 
     const userInfo = await fetch(`http://localhost:3001/users/info/miniprofile/${user_id}`, {
 

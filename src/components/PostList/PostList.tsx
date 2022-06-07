@@ -28,42 +28,57 @@ const FollowersPage = lazy(() => import("../FollowersPage/FollowersPage"));
 const MentionsPage = lazy(() => import("../MentionsPage/MentionsPage"));
 const FeedPage = lazy(() => import("../FeedPage/FeedPage"));
 
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes: string | number;
+}
+
+type PostsArray = PostType[]
+
+// type createPostsType = 
+
 const PostList: FC = () => {
 
     const { toggleModal } = useSigninModal();
 
 
-    const [ postlistLoading, setPostlistLoading ] = useState();
+    const [ postlistLoading, setPostlistLoading ] = useState<boolean>();
 
     const [tabState, setTabState ] = useState("posts")
 
-    const [seeMoreLoading, setSeeMoreLoading] = useState();
+    const [seeMoreLoading, setSeeMoreLoading] = useState<boolean>();
 
 
     // eslint-disable-next-line
     // const [loggedInUser, setloggedInUser] = useContext(UserInfoContext);
     const { loggedInUser } = useContext( UserInfoContext);
 
-    const [userPosts, setUserPosts] = useState();
+    const [userPosts, setUserPosts] = useState<JSX.Element[]>();
 
-    const [postsArray, setPostsArray] = useState();
+    const [postsArray, setPostsArray] = useState<JSX.Element[]>();
 
     const [lastPostShown , setLastPostShown] = useState(10)
 
     // Get user comments
-    const createPosts = (commentsArray) => {
+    const createPosts = (commentsArray: PostsArray) => {
         
         let posts = []
 
         for(let i = 0; i < commentsArray.length; i++ ){
 
-            let loggedInComments = commentsArray[i] 
+            let loggedInComments = commentsArray[i]; 
             
             const {comment_id, text_content, created_at, status, likes, username, nickname, profile_pic_url} = loggedInComments;                
                 
             if(loggedInComments.hasOwnProperty("comment_id")){
 
-                posts.push( <Post key={`post_${comment_id}`} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} userPosts={userPosts} setUserPosts={setUserPosts} loggedInComments={commentsArray} status={ status} likes={likes} /> );
+                posts.push( <Post key={`post_${comment_id}`} uuid={comment_id} username={username} nickname={nickname} date_posted={created_at} profile_pic_url={profile_pic_url} text_content={text_content === null ? "" : text_content} status={status} likes={likes} /> );
 
                 
             }
@@ -93,7 +108,7 @@ const PostList: FC = () => {
                     else return response.json();
                 })
                 .then(comments => {
-    
+                    
     
                     setPostsArray(createPosts(comments))
 
@@ -115,7 +130,7 @@ const PostList: FC = () => {
                 
                     if(error === 403){
     
-                        toggleModal()
+                        toggleModal!()
                     }
     
                 })
@@ -124,7 +139,7 @@ const PostList: FC = () => {
         setInitPosts()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loggedInUser.id])
+    }, [loggedInUser?.id])
 
     
     const [ suggestedProfiles, setSuggestedProfiles ] = useState();
@@ -148,7 +163,7 @@ const PostList: FC = () => {
     
 
 
-    miniprofilesArray = createMiniProfiles(suggestedProfiles);
+    miniprofilesArray = createMiniProfiles(suggestedProfiles? suggestedProfiles : []);
 
     const seeMorePosts = async () => {
 
@@ -171,16 +186,19 @@ const PostList: FC = () => {
             setPostsArray(createPosts(comments))
 
 
-            if(lastPostShown < postsArray?.length ){
-                const increment = 10;
-        
-                const lastNewPostIndex = lastPostShown? lastPostShown + increment: increment
-        
+            if(postsArray){
 
-                setLastPostShown(lastNewPostIndex)
-        
-                setUserPosts(postsArray?.slice(0,lastNewPostIndex))
+                if(lastPostShown < postsArray?.length ){
+                    const increment = 10;
             
+                    const lastNewPostIndex = lastPostShown? lastPostShown + increment: increment
+            
+    
+                    setLastPostShown(lastNewPostIndex)
+            
+                    setUserPosts(postsArray?.slice(0,lastNewPostIndex))
+                
+            }
         }
             else{
                 
@@ -193,7 +211,7 @@ const PostList: FC = () => {
                 
             if(error === 403){
 
-                toggleModal()
+                toggleModal!()
             }
 
         })
@@ -216,12 +234,12 @@ const PostList: FC = () => {
 
  
 
-    const onChangeTab = (e) => {
+    const onChangeTab = (e: any) => {
         e.preventDefault();
 
         setPostlistLoading(true)
 
-        const tabName = e.target.getAttribute('tabname');
+        const tabName = e.target.getAttribute('data-tabname');
 
         setTabState(tabName);
 
@@ -258,16 +276,16 @@ const PostList: FC = () => {
                 
                 <SigninModalHOC>
 
-                    <CommentBox createPosts={createPosts} setPostsArray={setPostsArray} postListFetchFunction={() => getHomePosts()} parent_id={null} ></CommentBox>
+                    <CommentBox createPosts={createPosts} setPostsArray={setPostsArray} postListFetchFunction={() => getHomePosts()} parent_id={""} ></CommentBox>
 
                 </SigninModalHOC>
          
                     
                     <div className="postlist-tabs">
-                        <li className={tabState === "posts"? "tab_active": ""} tabname="posts" onClick={onChangeTab} >Posts</li>
-                        <li className={tabState === "mentions"? "tab_active": ""} tabname="mentions" onClick={onChangeTab} >Mentions</li>
-                        <li className={tabState === "feed"? "tab_active": ""} tabname="feed" onClick={onChangeTab} >Feed</li>
-                        <li className={tabState === "followers"? "tab_active": ""} tabname="followers" onClick={onChangeTab} >Followers</li>
+                        <li className={tabState === "posts"? "tab_active": ""} data-tabname="posts" onClick={onChangeTab} >Posts</li>
+                        <li className={tabState === "mentions"? "tab_active": ""} data-tabname="mentions" onClick={onChangeTab} >Mentions</li>
+                        <li className={tabState === "feed"? "tab_active": ""} data-tabname="feed" onClick={onChangeTab} >Feed</li>
+                        <li className={tabState === "followers"? "tab_active": ""} data-tabname="followers" onClick={onChangeTab} >Followers</li>
                       
                     </div>
 
@@ -280,14 +298,14 @@ const PostList: FC = () => {
                                 {userPosts}
                                 <LoaderHOC loading={seeMoreLoading}>
 
-                                    <div onClick={seeMorePosts}className={lastPostShown >= postsArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
+                                    <div onClick={seeMorePosts}className={lastPostShown >= postsArray?.length! ? "hidden" : "posts-see_more"}>See More &#8658;</div>
                                 </LoaderHOC>
 
                             </>
                             :tabState === "mentions"
                             ? <MentionsPage></MentionsPage>
                             :tabState === "followers"
-                            ? <FollowersPage user_id={loggedInUser.id} ></FollowersPage>
+                            ? <FollowersPage user_id={loggedInUser?.id as string} ></FollowersPage>
                             :tabState === "feed"
                             ? <FeedPage></FeedPage>
                             :""

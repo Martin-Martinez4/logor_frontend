@@ -12,13 +12,18 @@ import UserInfoContext from "../context/UserInfoProvider";
 
 import "./Signin.css"
 
-const Signin:FC = ({ reDirect }) => {
+type reDirect = {
+
+    reDirect: boolean;
+}
+
+const Signin:FC<reDirect> = ({ reDirect }) => {
 
     const { showModal, toggleModal } = useSigninModal();
 
     const { loadUser } = useContext( UserInfoContext);
 
-    const [signinLoading, setSigninLoading] = useState()
+    const [signinLoading, setSigninLoading] = useState<boolean>()
 
     const { setAuth } = useAuth();
 
@@ -51,7 +56,7 @@ const Signin:FC = ({ reDirect }) => {
         
     }
 
-    const errorMessageTimeout = (milisecs) => {
+    const errorMessageTimeout = (milisecs: number) => {
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {inputError, flagTripped} = loginError
@@ -63,7 +68,7 @@ const Signin:FC = ({ reDirect }) => {
 
     }
 
-    const onAttemptLogin = async (e) => {
+    const onAttemptLogin = async (e: { preventDefault: () => void; }) => {
 
         
         e.preventDefault();
@@ -94,7 +99,7 @@ const Signin:FC = ({ reDirect }) => {
 
                 // token stuff
 
-                setAuth(() => {
+                setAuth!(() => {
 
                     return { user_id: user.user_id, access_token:user.access_token }
                 });
@@ -119,14 +124,20 @@ const Signin:FC = ({ reDirect }) => {
                     .then(res => res.json())
                     .then(user => {
 
+                        console.log(user[0])
+
                         try{
 
-                            loadUser(user[0]) 
+                            if(loadUser){
+
+                                loadUser(user[0]) 
+                            }
+
                             
 
                             if(showModal){
 
-                                toggleModal();
+                                toggleModal!();
                             }
 
                             if(reDirect){

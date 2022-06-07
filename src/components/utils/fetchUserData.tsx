@@ -1,5 +1,5 @@
 
-export const getUserIdByNickname = async (nickname) => {
+export const getUserIdByNickname = async (nickname: string) => {
 
     const user_id = await fetch(`http://localhost:3001/userID/${nickname}`, {
 

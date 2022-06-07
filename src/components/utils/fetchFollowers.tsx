@@ -1,7 +1,7 @@
 
 // API calls
 
-export const getFollowersCount = async (user_id) => {
+export const getFollowersCount = async (user_id: string) => {
 
     const followersCount = await fetch(`http://localhost:3001/user/number/followers/${user_id}`, {
 
@@ -23,7 +23,7 @@ export const getFollowersCount = async (user_id) => {
     
 }
 
-export const getFollowers = async (user_id) => {
+export const getFollowers = async (user_id: string) => {
 
     const followers = await fetch(`http://localhost:3001/user/followers?user_id=${user_id}`, {
 
@@ -43,7 +43,7 @@ export const getFollowers = async (user_id) => {
     return followers
 }
 
-export const getFollowingCount = async (user_id) => {
+export const getFollowingCount = async (user_id: string) => {
 
     const followingCount = await fetch(`http://localhost:3001/user/number/following/${user_id}`, {
 
@@ -65,7 +65,7 @@ export const getFollowingCount = async (user_id) => {
 
 }
 
-export const getFollowees = async (user_id) => {
+export const getFollowees = async (user_id: string) => {
 
     const followees = await fetch(`http://localhost:3001/user/following?user_id=${user_id}`, {
 
@@ -85,7 +85,7 @@ export const getFollowees = async (user_id) => {
     return followees
 }
 
-export const isAFollowerOfB = async (follower_id, followee_id) => {
+export const isAFollowerOfB = async (follower_id: string, followee_id: string) => {
 
     // followee = being followed, follower subscribes to followee
 
@@ -114,7 +114,7 @@ export const isAFollowerOfB = async (follower_id, followee_id) => {
 
 }
 
-export const loggedIsFollower = async (followee_id) => {
+export const loggedIsFollower = async (followee_id: string) => {
 
     const isAFollowerOfB = await fetch('http://localhost:3001/user/is/follower/', {
 
@@ -142,7 +142,7 @@ export const loggedIsFollower = async (followee_id) => {
     return isAFollowerOfB
 }
 
-export const loggedIsFollowee = async (follower_id) => {
+export const loggedIsFollowee = async (follower_id: string) => {
 
     const isAFollowerOfB = await fetch('http://localhost:3001/user/is/followee/', {
 

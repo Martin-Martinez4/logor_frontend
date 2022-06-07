@@ -10,27 +10,40 @@ import Loader1 from '../svg/Loader1/Loader1';
 import VisitorPost from '../Posts/VisitorPost';
 import useSigninModal from "../hooks/useModal";
 
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes: string | number;
+}
+
+type PostsArray = PostType[]
+
 
 const MentionsPage:FC = () => {
 
     const { toggleModal } = useSigninModal();
 
-    const [mentionsArray, setMentionsArray] = useState();
+    const [mentionsArray, setMentionsArray] = useState<JSX.Element[]>();
 
     const { loggedInUser } = useContext( UserInfoContext);
     
     // eslint-disable-next-line  @typescript-eslint/no-unused-vars
-    const [ postlistLoading, setPostlistLoading ] = useState();
-    const [seeMoreLoading,  setSeeMoreLoading] = useState();
+    const [ postlistLoading, setPostlistLoading ] = useState<boolean>();
+    const [seeMoreLoading,  setSeeMoreLoading] = useState<boolean>();
 
 
 
-    const [userMentions, setUserMentions] = useState();
+    const [userMentions, setUserMentions] = useState<JSX.Element[]>();
 
 
     const [lastMentionShown , setLastMentionShown] = useState(10)
 
-    const createPosts = (commentsArray) => {
+    const createPosts = (commentsArray: PostsArray)  => {
         
         let posts = []
 
@@ -42,7 +55,7 @@ const MentionsPage:FC = () => {
                 
             if(loggedInComments.hasOwnProperty("comment_id")){
 
-                posts.push( <VisitorPost key={comment_id} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} loggedInComments={commentsArray} createPosts={createPosts} posts={posts} status={ status} likes={likes} /> );
+                posts.push( <VisitorPost key={comment_id} comment_id={comment_id} username={username} nickname={nickname} created_at = {created_at} profile_pic_url={profile_pic_url} text_content={text_content === null? "": text_content} status={ status} likes={likes} /> );
 
                 
             }
@@ -90,7 +103,7 @@ const MentionsPage:FC = () => {
                 
                 if(error === 403){
 
-                    toggleModal()
+                    toggleModal!()
                 }
 
             })
@@ -99,7 +112,7 @@ const MentionsPage:FC = () => {
         getMentionPost()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loggedInUser.id])
+    }, [loggedInUser?.id])
 
     
     const seeMorePosts = async () => {
@@ -120,7 +133,7 @@ const MentionsPage:FC = () => {
             setMentionsArray(createPosts(comments))
 
 
-            if(lastMentionShown < mentionsArray?.length ){
+            if(mentionsArray && lastMentionShown < mentionsArray?.length ){
                 const increment = 10;
         
                 const lastNewPostIndex = lastMentionShown? lastMentionShown + increment: increment
@@ -165,7 +178,7 @@ const MentionsPage:FC = () => {
 
             <LoaderHOC loading={seeMoreLoading}>
 
-                <div onClick={seeMorePosts}className={lastMentionShown >= mentionsArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
+                <div onClick={seeMorePosts}className={mentionsArray && lastMentionShown >= mentionsArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
             </LoaderHOC>
 
         </>

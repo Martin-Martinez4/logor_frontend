@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect, useContext, FC } from "react";
+import React, {useState, useEffect, useContext, FC, Dispatch, SetStateAction } from "react";
 import {useNavigate, Link} from 'react-router-dom';
 
 import useSigninModal from "../hooks/useModal";
@@ -51,16 +51,37 @@ const Register:FC = () => {
 
     // const { loadUser } = useUserInfo();
 
-    const [usernameValid, setUsernameValid] = useState();
-    const [nicknameValid, setNicknameValid] = useState();
-    const [emailValid, setEmailValid] = useState();
-    const [passwordValid, setPasswordValid] = useState();
-    const [password2Valid, setPassword2Valid] = useState();
-    const [topValid, setTopVaild] = useState();
+    const [usernameValid, setUsernameValid] = useState<string>();
+    const [nicknameValid, setNicknameValid] = useState<string>();
+    const [emailValid, setEmailValid] = useState<string>();
+    const [passwordValid, setPasswordValid] = useState<string>();
+    const [password2Valid, setPassword2Valid] = useState<string>();
+    const [topValid, setTopVaild] = useState<string>();
 
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
+
+    type User = {
+
+        id:string;
+        username:string;
+        joined_date:string;
+        nickname:string;
+        profile_pic_url: string;
+        description:string;
+        header_img_url: string;
+        location:string;
+        links:string;
+
+        name:string;
+        email:string;
+        password:string;
+        password2:string;
+        gender:string;
+        other: string;
+
+    }
     
     const [user, setUser] = useState({
 
@@ -89,7 +110,20 @@ const Register:FC = () => {
         alt: 'Upload an Image'
     });
 
-    const [previewBlobs, setPreviewBlobs] = useState({})
+    type mediaProps = {
+        src: string;
+        alt: string;
+    }
+
+    type previewBlobs = {
+
+        profile_pic_url?: mediaProps;
+        header_img_url?: mediaProps;
+
+
+    }
+
+    const [previewBlobs, setPreviewBlobs] =  useState<previewBlobs>({})
 
     const handleImg = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -134,7 +168,12 @@ const Register:FC = () => {
 
         const { src } = e.currentTarget;
 
-        const pictureType = el.getAttribute("pic-type")
+        const pictureType: string | null  = el?.getAttribute("pic-type") ? el?.getAttribute("pic-type") : null ;
+
+        if(pictureType === null){
+
+            return
+        }
 
         setPreviewBlobs(prev => ({ ...prev, [pictureType]:{
             src: src,
@@ -176,7 +215,7 @@ const Register:FC = () => {
         navigate('/');
         }
 
-    const onAttemptRegister = async (user, e) => {
+    const onAttemptRegister = async (user: User, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
         e.preventDefault();
 
@@ -229,7 +268,7 @@ const Register:FC = () => {
 
                     setTimeout(() => {
         
-                        setTopVaild()
+                        setTopVaild("")
         
                     }, 2000)
                     
@@ -263,7 +302,7 @@ const Register:FC = () => {
     
                     // token stuff
     
-                    setAuth(() => {
+                    setAuth!(() => {
     
                         return { user_id: user.user_id, access_token:user.access_token }
                     });
@@ -284,7 +323,7 @@ const Register:FC = () => {
     
                         setTimeout(() => {
             
-                            setTopVaild()
+                            setTopVaild("")
             
                         }, 2000)
     
@@ -308,7 +347,7 @@ const Register:FC = () => {
 
                         setTimeout(() => {
             
-                            setTopVaild()
+                            setTopVaild("")
 
             
                         }, 2000)
@@ -448,12 +487,12 @@ const Register:FC = () => {
 
                 try{
 
-                    loadUser(user[0]) 
+                    loadUser!(user[0]) 
                     
 
                     if(showModal){
 
-                        toggleModal();
+                        toggleModal!();
                     }
                     
                     navigate(`/home/${user[0].id}`)
@@ -475,7 +514,7 @@ const Register:FC = () => {
     }
  
 
-    const validateInput = (e, validateFunciton, setFunction, errorMessage) => {
+    const validateInput = (e: React.ChangeEvent<HTMLInputElement>, validateFunciton: ((a: string) => boolean), setFunction: Dispatch<SetStateAction<string | undefined>>, errorMessage :string) => {
 
         e?.preventDefault()
         
@@ -486,7 +525,7 @@ const Register:FC = () => {
         }
         else{
 
-            setFunction()
+            setFunction("")
 
         }
 
@@ -511,7 +550,7 @@ const Register:FC = () => {
         }
     }
 
-    const validateOnBlur = async (e, validateFunciton, setFunction, errorMessage, checkIfAvailable=false, ifAvailableFunction=returnFalse) => {
+    const validateOnBlur = async (e: React.FocusEvent<HTMLInputElement, Element>, validateFunciton: ((a: string) => boolean), setFunction: Dispatch<SetStateAction<string | undefined>>, errorMessage: string, checkIfAvailable: boolean = false, ifAvailableFunction: ((nickname: string) => Promise<any>) = async () => false) => {
 
         e?.preventDefault()
 
@@ -533,14 +572,14 @@ const Register:FC = () => {
                 }
                 else{
                     
-                    setFunction()
+                    setFunction("")
                 }
 
 
                 return
             }
 
-            setFunction()
+            setFunction("")
 
 
             return
@@ -562,7 +601,7 @@ const Register:FC = () => {
 
         if(emailValidate && usernameValidate && nicknameValidate && passwordValidate && passwordsMatch && usernameAvailable && nicknameAvailable){
 
-            setTopVaild()
+            setTopVaild("")
 
             return setCurrentStepValue((currentStep + 1))
         }
@@ -574,7 +613,7 @@ const Register:FC = () => {
 
             setTimeout(() => {
 
-                setTopVaild()
+                setTopVaild("")
 
             }, 1200)
 

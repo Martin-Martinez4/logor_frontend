@@ -1,5 +1,5 @@
 
-import { FC, useEffect, useState, useContext, useRef } from "react";
+import { FC, useEffect, useState, useContext, useRef, Dispatch, SetStateAction } from "react";
 
 import "./MiniProfile.css";
 import { serverAddressString } from "../utils/exportGetImage"; 
@@ -13,14 +13,34 @@ import LoaderHOC from "../LoaderHOC/LoaderHOC";
 
 import Follow from "../Follow/Follow";
 
+interface UserInformation {
+    id: string;
+    username: string;
+    joined_date: string;
+    nickname: string;
+    profile_pic_url: string;
+    description: string;
+    header_img_url: string;
+    location: string;
+    links: string;
+    followers: string;
+    following: string;
 
-const MiniProfile:FC = ({ user_id }) => {
+}
+
+type user_id = {
+
+    user_id: string;
+}
+
+
+const MiniProfile:FC<user_id> = ({ user_id }) => {
 
     const mountedRef = useRef(true)
 
-    const [ miniProfileUser, setMiniProfileUser] = useState()
+    const [ miniProfileUser, setMiniProfileUser] = useState<UserInformation>()
 
-    const [followStatusLoading, setFollowStatus] = useState();
+    const [followStatusLoading, setFollowStatus] = useState<boolean>(false);
 
     const { loggedInUser } = useContext( UserInfoContext);
 
@@ -50,7 +70,7 @@ const MiniProfile:FC = ({ user_id }) => {
 
         let isMounted = true;
         
-        const initMinprofile = async (setMiniProfileUser, user_id) => {
+        const initMinprofile = async (setMiniProfileUser: Dispatch<SetStateAction<UserInformation>>, user_id :string) => {
 
             if(isMounted){
 
@@ -81,7 +101,7 @@ const MiniProfile:FC = ({ user_id }) => {
 
         }
         
-        initMinprofile(setMiniProfileUser, user_id)
+        initMinprofile(setMiniProfileUser as Dispatch<SetStateAction<UserInformation>>, user_id)
 
         return () => { isMounted = false;};
 
@@ -105,7 +125,7 @@ const MiniProfile:FC = ({ user_id }) => {
 
                 <LoaderHOC loading={followStatusLoading} loader={2}>
 
-                    <Follow visiteeUser={{id: user_id}} buttonClasses={"profileName__button"} followCountClass={"hidden"}/>
+                    <Follow visiteeUser={{id: user_id, username: miniProfileUser ? miniProfileUser?.username : "N/A" }} buttonClasses={"profileName__button"} followCountClass={"hidden"}/>
                 </LoaderHOC>
             </div>
         </div>

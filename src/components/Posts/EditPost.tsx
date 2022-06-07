@@ -5,7 +5,12 @@ import { FC } from "react";
 import Card from "../Card/Card";
 import "./Posts.css";
 
-const EditPost: FC = ({ uuid }) => {
+type uuid = {
+
+        uuid: string;
+}
+
+const EditPost: FC<uuid> = ({ uuid }) => {
  
 
         return(

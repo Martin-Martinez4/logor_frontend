@@ -1,5 +1,5 @@
 
- const getTagsMentionssLinks = (text_string) => {
+ const getTagsMentionssLinks = (text_string: string) => {
 
     if(text_string === null || text_string === undefined){
         text_string = "";
@@ -18,7 +18,7 @@
 
     while((match = pattern.exec(text_string))){
 
-        tempArray.push([text_string.substring(tempPrevIndex, match.index)])
+        tempArray.push([text_string.substring(tempPrevIndex as number, match.index)])
         tempArray.push([text_string.substring(match.index, pattern.lastIndex)])
 
         tempPrevIndex = pattern.lastIndex;
@@ -28,7 +28,7 @@
     if(tempPrevIndex !== text_string.length){
 
         
-        tempArray.push([text_string.substring(tempPrevIndex, text_string.length)])
+        tempArray.push([text_string.substring(tempPrevIndex as number, text_string.length)])
     }
 
     return tempArray;

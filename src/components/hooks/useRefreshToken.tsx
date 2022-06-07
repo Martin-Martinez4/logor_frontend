@@ -23,14 +23,18 @@ const useRefreshToken = () => {
             
             if(user.access_token){
 
-                setAuth(prev => {
-                    return { 
-                        ...prev, 
-                        user_id: user.user_id,
-                        access_token:user.access_token  
-                    }
-                });
+                if(setAuth){
 
+                    setAuth(prev => {
+                        return { 
+                            ...prev, 
+                            user_id: user.user_id,
+                            access_token:user.access_token  
+                        }
+                    });
+    
+                }
+                
                 return user.access_token;
 
               

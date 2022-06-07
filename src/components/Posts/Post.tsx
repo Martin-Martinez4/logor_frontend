@@ -1,5 +1,5 @@
 
-import React, { FC, useEffect, useState, useContext, useMemo } from "react";
+import React, { FC, useEffect, useState, useMemo } from "react";
 
 import { getImageString } from "../utils/exportGetImage";
 import Card from "../Card/Card";
@@ -21,13 +21,22 @@ import HeartIcon from "../svg/HeartIcon/HeartIcon2";
 import CheckmarkIcon from "../svg/CheckmarkIcon/CheckmarkIcon";
 import ResponsesIcon from "../svg/ResponsesIcon/ResponsesIcon";
 import useSigninModal from "../hooks/useModal";
-import UserInfoContext from "../context/UserInfoProvider";
+// import UserInfoContext from "../context/UserInfoProvider";
 
 import LoaderHOC from "../LoaderHOC/LoaderHOC";
 
+type PostComponent = { 
+    uuid: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    date_posted: string; 
+    text_content: string; 
+    status: string;
+    likes: string | number;
+}
 
-
-const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_content, status }) => {
+const Post: FC<PostComponent> = ({ uuid, username, nickname, profile_pic_url, date_posted, text_content, status }) => {
 
     const maxChars = 920;
 
@@ -35,10 +44,10 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
     // const { showModal, toggleModal } = useModal();
     const { showModal, toggleModal } = useSigninModal();
 
-    const [replyMode, setReplyMode] = useState();
+    const [replyMode, setReplyMode] = useState<boolean>();
     
     // const [loggedInUser, setloggedInUser] = useContext(UserInfoContext);
-    const { loggedInUser } = useContext( UserInfoContext);
+    // const { loggedInUser } = useContext( UserInfoContext);
 
 
     const [postInformation, setPostInfomration] = useState({
@@ -56,7 +65,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
             // this now gets called when the component unmounts
           };
 
-    }, [user_profile, postInformation])
+    }, [profile_pic_url, postInformation])
 
 
 
@@ -70,13 +79,13 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
         lastEditedReadable = formatDate(postInformation.status[1]);
     }
 
-    const dropdownContainer = React.createRef();
-    const cancelButton = React.createRef();
+    const dropdownContainer = React.createRef<HTMLInputElement>();
+    const cancelButton = React.createRef<HTMLButtonElement>();
     
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
-    const [dropDownLoading, setDropDownLoading] = useState()
-    const [cancelButtonPress, setCancelButtonPress] = useState()
+    const [dropDownLoading, setDropDownLoading] = useState<boolean>()
+    const [cancelButtonPress, setCancelButtonPress] = useState<boolean>()
 
     const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState(false);
 
@@ -98,7 +107,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
 
         try{
 
-            if(await refreshTokenBool(auth, setAuth)){
+            if(await refreshTokenBool(setAuth!)){
     
                 setDeleteConfirmationVisible(!deleteConfirmationVisible);
         
@@ -112,7 +121,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
             }
             else{
     
-                toggleModal()
+                toggleModal!()
                 
                 
             }
@@ -122,7 +131,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
         }
         catch{
             
-            toggleModal()
+            toggleModal!()
             setDropDownLoading(false)
 
         }
@@ -141,7 +150,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
 
         try{
             
-            if(await refreshTokenBool(auth, setAuth)){
+            if(await refreshTokenBool(setAuth!)){
                 
                 
                 let tempVisible:boolean = !(editMode.visible);
@@ -155,7 +164,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
             }else{
         
         
-                toggleModal()
+                toggleModal!()
             }
 
             setDropDownLoading(false)
@@ -164,14 +173,14 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
         catch{
 
             setDropDownLoading(false)
-            toggleModal()
+            toggleModal!()
                     
         }
     }
 
     useEffect(() => {
 
-        const handleClickOutside = (e) => {
+        const handleClickOutside = (e: any) => {
         
             if (
                 dropdownContainer.current &&
@@ -201,7 +210,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
 
     }, [dropdownVisible, deleteConfirmationVisible, editMode, status,  cancelButton, dropdownContainer]);
 
-    const handleDelete =async (e) => {
+    const handleDelete =async (e: { preventDefault: () => void; }) => {
         
         e.preventDefault();
         setDropDownLoading(true)
@@ -235,7 +244,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
     }
 
 
-    const oninputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const oninputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 
         if(e === null){
             return
@@ -249,9 +258,9 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
     }
 
     
-    const handleEdit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleEdit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
-        e.preventDefault();
+        // e.preventDefault();
 
         toggleEditMode()
 
@@ -284,7 +293,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
 
     }
 
-    const exitEditMode = (e) => {
+    const exitEditMode = (e: { preventDefault: () => void; }) => {
 
         setCancelButtonPress(true)
 
@@ -346,14 +355,14 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
                 :
                 <>
                 <div className="post user_image">
-                    <img src={`${getImageString}${user_profile}`} alt="profile" className="post_user_image "></img>
+                    <img src={`${getImageString}${profile_pic_url}`} alt="profile" className="post_user_image "></img>
                    
                 </div>
                 <div className="post user_content">
                     <div className="post user_info">
-                        <div className="userNameArea">
+                        <div className="usernameArea">
 
-                            <strong>{userName} </strong>
+                            <strong>{username} </strong>
 
                             {/* Small Screen option dots */}
                             <span className="option_dots on_750px" onClick={toggleDropDownVisible} >
@@ -383,7 +392,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
                             (
                                 
                                 <div>
-                                    <textarea id="commentBox" name="textContent" value={editMode.textContent} onChange={oninputChange} className="commentBox__commentInput" placeholder="Have something to say?" maxLength={maxChars} cols={92} rows={10}></textarea>
+                                    <textarea id="commentBox" name="textContent" value={editMode.textContent} onChange={(e) => oninputChange(e)} className="commentBox__commentInput" placeholder="Have something to say?" maxLength={maxChars} cols={92} rows={10}></textarea>
 
                                     <div className="commentBox__buttonArea">
                                     <LoaderHOC loading={cancelButtonPress}>
@@ -391,7 +400,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
                                         <em className="buttonArea__charsLeft">Characters Left: {charsLeft}</em>
                                     </LoaderHOC>
                                         <div className="buttonArea__buttons">
-                                            <button className="button primary" onClick={handleEdit}>Submit</button>
+                                            <button className="button primary" onClick={(e) => handleEdit(e)}>Submit</button>
                                             <button className="button red" onClick={exitEditMode} >Cancel</button>
 
                                         </div>
@@ -432,7 +441,7 @@ const Post: FC = ({ uuid, userName, nickname, user_profile, date_posted, text_co
                             <div> </div> :
                             <React.Fragment>
                                <div className="post__icons">
-                                <HeartIcon comment_id={uuid} loggedInId={loggedInUser.id}></HeartIcon>
+                                <HeartIcon comment_id={uuid} ></HeartIcon>
                                 <CheckmarkIcon ></CheckmarkIcon>
                                 <ResponsesIcon comment_id={uuid}></ResponsesIcon>
                             </div>

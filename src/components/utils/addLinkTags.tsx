@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 
-const addLinkTags = (treatedArray) => {
+const addLinkTags = (treatedArray: string[][]) => {
 
     let linkTagsAdded = [];
 

@@ -22,7 +22,25 @@ import UserInfoContext from "../context/UserInfoProvider";
 
 import "./postlist.css"
 
-const VisitorPostList: FC = ({ userOrTagID }) => {
+type PostType = { 
+    comment_id: string; 
+    username: string; 
+    nickname: string; 
+    profile_pic_url: string; 
+    created_at: string; 
+    text_content: string | null; 
+    status: string;
+    likes: string | number;
+}
+
+type PostsArray = PostType[]
+
+type userOrTagID = {
+
+    userOrTagID: string
+}
+
+const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
 
 
      const location = useLocation();
@@ -32,17 +50,17 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
      const { loggedInUser } = useContext( UserInfoContext);
 
 
-     const [userPosts, setUserPosts] = useState();
+     const [userPosts, setUserPosts] = useState<JSX.Element[]>();
 
-     const [postsArray, setPostsArray] = useState();
+     const [postsArray, setPostsArray] = useState<JSX.Element[]>();
 
      const postIncrement = 10
  
      const [lastPostShown , setLastPostShown] = useState(postIncrement)
 
-     const CreatePostList = (comments, postIncrement) => {
+     const CreatePostList = (comments: PostsArray, postIncrement: number) => {
 
-        console.log("comments: ",createPosts(comments))
+        // console.log("comments: ",createPosts(comments))
                     
                     
         setPostsArray(createPosts(comments))
@@ -62,13 +80,13 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
 
      }
 
-     const addMorePostsToUserPosts = (comments, incrementBy) => {
+     const addMorePostsToUserPosts = (comments: PostsArray, incrementBy: number) => {
 
         setPostsArray(createPosts(comments))
     
         // console.log(postsArray)
 
-        if(lastPostShown < postsArray?.length ){
+        if(postsArray && lastPostShown < postsArray?.length ){
     
             const lastNewPostIndex = lastPostShown? lastPostShown + incrementBy: incrementBy
 
@@ -95,7 +113,7 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
 
 
      // Get user comments
-     const createPosts = (commentsArray) => {
+     const createPosts = (commentsArray: PostsArray): JSX.Element[] => {
          
          let posts = []
  
@@ -112,7 +130,7 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
              if(loggedInComments.hasOwnProperty("comment_id")){
  
  
-                     posts.push( <VisitorPost key={comment_id} uuid={comment_id} userName={username} nickname={nickname} date_posted = {created_at} user_profile={profile_pic_url} text_content={text_content === null? 0: text_content} userPosts={userPosts} setUserPosts={setUserPosts} loggedInComments={commentsArray} createPosts={createPosts} posts={posts} status={status}  /> );
+                     posts.push( <VisitorPost key={comment_id} comment_id={comment_id} username={username} nickname={nickname} created_at = {created_at} profile_pic_url={profile_pic_url} text_content={text_content === null? "": text_content} status={status}  /> );
  
                  
              }
@@ -319,7 +337,7 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
 
      }, [userPosts])
  
-     miniprofilesArray = createMiniProfiles(suggestedProfiles);
+     miniprofilesArray = createMiniProfiles(suggestedProfiles? suggestedProfiles : []);
  
  
      
@@ -349,7 +367,7 @@ const VisitorPostList: FC = ({ userOrTagID }) => {
                     </div>
                 </Card>
                 {userPosts === undefined?<UserNotFound/>:userPosts.length > 0?userPosts: <NoPosts />}
-                <div onClick={seeMorePosts}className={lastPostShown >= postsArray?.length? "hidden" : "posts-see_more"}>See More &#8658;</div>
+                <div onClick={seeMorePosts}className={(postsArray && lastPostShown >= postsArray?.length)? "hidden" : "posts-see_more"}>See More &#8658;</div>
                
                 {/* White  space at the end of the scroll section */}
                 <div className="empty"></div>

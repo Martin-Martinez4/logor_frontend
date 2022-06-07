@@ -15,9 +15,9 @@ import "./ProgressBar.css";
 
 type BarProps = {
 
-    barHeight: number,
-    barWidth1: number,
-    barWidth2: number,
+    barHeight: number | string,
+    barWidth1: number | string,
+    barWidth2: number | string,
     numberOfSteps: number,
     currentStep: number,
     labelsArray: string[]

@@ -11,7 +11,12 @@ import LeftsideCard from "../LeftsideCard/LeftsideCard";
 
 import"./contentArea.css";
 
-const VisitorContentArea:FC = ({ userOrTagID }) => {
+type userOrTagID = {
+
+    userOrTagID: string
+}
+
+const VisitorContentArea:FC<userOrTagID> = ({ userOrTagID }) => {
 
     const [ suggestedProfiles, setSuggestedProfiles ] = useState();
 
@@ -33,7 +38,7 @@ const VisitorContentArea:FC = ({ userOrTagID }) => {
     }, [])
 
 
-    miniprofilesArray = createMiniProfiles(suggestedProfiles);
+    miniprofilesArray = createMiniProfiles(suggestedProfiles ? suggestedProfiles : []);
 
 
     return (

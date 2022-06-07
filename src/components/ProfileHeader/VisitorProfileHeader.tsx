@@ -1,7 +1,7 @@
 
 import { serverAddressString } from "../utils/exportGetImage";
 
-import { FC, useContext, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useContext, useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 import Card from "../Card/Card";
@@ -26,19 +26,38 @@ import LocationIcon from "../../assets/LocationIcon.svg"
 import LinkIcon from "../../assets/LinkIcon.svg"
 import CalenderIcon from "../../assets/CalenderIcon.svg"
 
-const VisitorProfileHeader:FC = ({ userOrTagID }) =>{
+type userOrTagID = {
+
+    userOrTagID: string
+}
+
+type visiteeUser = {
+    id: string;
+    username:string;
+    nickname:string;
+    profile_pic_url:string;
+    header_img_url:string;
+    joined_date:string;
+    description:string;
+    location:string;
+    links:string;
+    followers:string;
+    following:string;
+
+
+}
+
+
+const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
 
     const location = useLocation();
-
-
-   
 
     const [undefUser, setUndefUser] = useState(false)
     
      // eslint-disable-next-line @typescript-eslint/no-unused-vars
      const { loggedInUser } = useContext( UserInfoContext);
 
-    const [visiteeUser, setVisiteeUser] = useState({
+    const [visiteeUser, setVisiteeUser] = useState<visiteeUser>({
         id: "",
         username:"",
         nickname:"",
@@ -60,7 +79,7 @@ const VisitorProfileHeader:FC = ({ userOrTagID }) =>{
 
     useEffect(() => {
 
-        const fetchUserData = async (userOrTagID, setVisiteeUser) => {
+        const fetchUserData = async (userOrTagID: string, setVisiteeUser: Dispatch<SetStateAction<visiteeUser>>) => {
 
 
         if(location.pathname.includes("/users/nickname/")){
@@ -220,7 +239,7 @@ const VisitorProfileHeader:FC = ({ userOrTagID }) =>{
 
                     <div className="profile_other profile_following">
                         
-                        <Follow visiteeUser={visiteeUser}  buttonClasses={"profileName__button"} />
+                        <Follow visiteeUser={{id: visiteeUser.id ? visiteeUser.id: "", username: visiteeUser.username}}  buttonClasses={"profileName__button"} />
                     </div>
 
 

@@ -1,10 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react';
 import "./scroll.css";
 
-type Props = PropsWithChildren<{
-  }>
+type ScrollProps = {
 
-const Scroll: FC<Props> = ({ children, classNames }) => {
+    classNames?: string;
+}
+
+const Scroll: FC<ScrollProps> = ({ children, classNames }) => {
 
     return (
         <div className={'scroll_div ' + classNames}>

@@ -1,5 +1,12 @@
+import { Dispatch, SetStateAction } from "react";
 
-export const refreshToken = async (setAuth) => {
+type Auth = {
+    access_token?: string;
+    user_id?: string;
+}
+
+
+export const refreshToken = async (setAuth: Dispatch<SetStateAction<Auth>>) => {
 
 
         // get refresh token like in siginin

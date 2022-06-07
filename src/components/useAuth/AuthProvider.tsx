@@ -1,8 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { StructuredType } from "typescript";
 
-const AuthContext = createContext({});
+type Auth = {
+    access_token?: string;
+    user_id?: string;
+}
 
-export const AuthProvider = ({ children }) => {
+type authContext = {
+
+    auth: Auth;
+    setAuth:  Dispatch<SetStateAction<Auth>>;
+}
+
+const AuthContext = createContext<Partial<authContext>>({});
+
+export const AuthProvider:FC = ({ children }) => {
     const [auth, setAuth] = useState({});
 
     return (

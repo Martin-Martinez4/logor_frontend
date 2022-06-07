@@ -1,7 +1,8 @@
 
 import React, {ReactElement} from "react";
 
-const LandingImage  = ():ReactElement => {
+// const LandingImage  = ():ReactElement => {
+const LandingImage  = () => {
 
     return(
 

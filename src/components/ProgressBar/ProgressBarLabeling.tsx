@@ -5,8 +5,8 @@ import "./ProgressBar.css";
 
 type LabelsProps = {
 
-    barHeight: number,
-    barWidth: number,
+    barHeight: number | string,
+    barWidth: number | string,
     numberOfSteps: number,
     labelsArray: string[]
 }
@@ -14,7 +14,7 @@ type LabelsProps = {
 
 const ProgressBarLabeling:FC<LabelsProps> = ({ numberOfSteps, barHeight, barWidth, labelsArray }) => {
 
-    const barLabelStyle = { width:String(barWidth/numberOfSteps)+"vw", display:"block" }
+    const barLabelStyle = { width: (typeof(barWidth) === "number") ? (String(barWidth/numberOfSteps)) : barWidth+"vw", display:"block" }
 
         let labels = []
         let label = ""

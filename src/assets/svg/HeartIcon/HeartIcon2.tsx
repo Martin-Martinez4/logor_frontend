@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import "./HeartIcon2.css";
 
@@ -8,7 +8,13 @@ import { formatNumber } from '../../../components/utils/formatNumber';
 import { userLiked } from '../../../components/utils/fetchLikes';
 import { deleteLike, createLike, getLikesCount } from '../../../components/utils/fetchLikes';
 
-export const HeartIcon2 = ({ comment_id, loggedInId }) => {
+type HeartIcon2Props = {
+
+    comment_id: string;
+    loggedInId: string;
+}
+
+export const HeartIcon2: FC<HeartIcon2Props> = ({ comment_id, loggedInId }) => {
 
     const [loginError, setLoginError] = useState({
 
@@ -33,17 +39,17 @@ export const HeartIcon2 = ({ comment_id, loggedInId }) => {
 
         if(loggedInLiked){
             // Liked already and clcked
-            await deleteLike(comment_id, loggedInId)
+            await deleteLike(comment_id)
 
             
         }else{
 
             console.log("create like")
 
-            await createLike(comment_id, loggedInId)
+            await createLike(comment_id)
         }
         
-        let tempLiked = await userLiked(comment_id, loggedInId);
+        let tempLiked = await userLiked(comment_id);
 
         let numLikes = await getLikesCount(comment_id)
 
@@ -80,7 +86,7 @@ export const HeartIcon2 = ({ comment_id, loggedInId }) => {
 
             }else{
 
-                tempLiked = await userLiked(comment_id, loggedInId);
+                tempLiked = await userLiked(comment_id);
 
                 if(tempLiked){
 

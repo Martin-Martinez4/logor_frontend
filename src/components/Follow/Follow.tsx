@@ -1,5 +1,5 @@
 
-import { FC, useEffect, useState, useContext, useRef } from "react";
+import { FC, useEffect, useState, useContext, useRef, Dispatch, SetStateAction } from "react";
 
 import UserInfoContext from "../context/UserInfoProvider";
 
@@ -17,14 +17,26 @@ import useAuth from "../hooks/useAuth";
 
 import "./Follow.css";
 
-const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
+type visiteeUser = {
+
+    id: string;
+    username?: string;
+}
+
+type followProps = {
+    visiteeUser:visiteeUser; 
+    buttonClasses?: string; 
+    followCountClass?: string;
+}
+
+const Follow:FC<followProps> = ({ visiteeUser, buttonClasses, followCountClass }) => {
 
       const componentIsMounted = useRef(true);
 
     const { loggedInUser, setloggedInUser } = useContext( UserInfoContext);
     const { auth, setAuth } = useAuth();
 
-    const [followLoading, setFollowLoading] = useState();
+    const [followLoading, setFollowLoading] = useState<boolean>();
 
 
     const [ followerCount, setFollowerCount ] = useState({
@@ -36,7 +48,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
     const { showModal, toggleModal } = useSigninModal();
 
 
-    const [ isFollower, setIsFollower ] = useState();
+    const [ isFollower, setIsFollower ] = useState<boolean>();
 
     const handleFollow = async () => {
 
@@ -44,7 +56,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
 
         try{
 
-            const refreshBool = await refreshTokenBool(auth, setAuth)
+            const refreshBool = await refreshTokenBool(setAuth!)
     
             if(!refreshBool){
     
@@ -54,7 +66,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
                     return 
                 }else{
     
-                    toggleModal()
+                    toggleModal!()
                     return
                 }
     
@@ -71,10 +83,10 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
     
             setFollowerCount(prev => ({...prev, followers: followersCount, following: followingCount}))
 
-            const followersCountloggedIn =  await getFollowersCount(loggedInUser.id)
-            const followingCountloggedIn =  await getFollowingCount(loggedInUser.id)
+            const followersCountloggedIn =  await getFollowersCount(loggedInUser ? loggedInUser?.id : "")
+            const followingCountloggedIn =  await getFollowingCount(loggedInUser ? loggedInUser?.id : "")
 
-                setloggedInUser((prev) => 
+                setloggedInUser!((prev) => 
                         ({...prev, 
                       followers: followersCountloggedIn,
                       following: followingCountloggedIn
@@ -92,7 +104,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
                 }else{
     
                     console.error(err)
-                    toggleModal()
+                    toggleModal!()
                     return
                 }
     
@@ -114,7 +126,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
 
         try{
     
-            const refreshBool = await refreshTokenBool(auth, setAuth)
+            const refreshBool = await refreshTokenBool(setAuth!)
     
             if(!refreshBool){
     
@@ -124,7 +136,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
                     return 
                 }else{
     
-                    toggleModal()
+                    toggleModal!()
                     return
                 }
     
@@ -142,14 +154,17 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
     
             setFollowerCount(prev => ({...prev, followers: followersCount, following: followingCount}))
 
-            const followersCountloggedIn =  await getFollowersCount(loggedInUser.id)
-            const followingCountloggedIn =  await getFollowingCount(loggedInUser.id)
+            const followersCountloggedIn =  await getFollowersCount(loggedInUser ? loggedInUser?.id : "")
+            const followingCountloggedIn =  await getFollowingCount(loggedInUser ? loggedInUser?.id : "")
+
+            if(setloggedInUser){
 
                 setloggedInUser((prev) => 
                         ({...prev, 
                       followers: followersCountloggedIn,
                       following: followingCountloggedIn
                 }))
+            }
         }
         catch(err){
 
@@ -170,7 +185,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
         let isMounted = true; 
 
 
-        const checkIfFollower = async (user_id, setIsFollower) => {
+        const checkIfFollower = async (user_id: string, setIsFollower: Dispatch<SetStateAction<boolean>>) => {
 
             setFollowLoading(true);
 
@@ -183,7 +198,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
                     setFollowerCount(prev => ({...prev, followers: followersCount, following: followingCount}))
                 }
     
-                if(user_id && !(loggedInUser.username === "")){
+                if(user_id && !(loggedInUser?.username === "")){
     
                     // const isFollower = await loggedIsFollower(user_id)
 
@@ -219,9 +234,9 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
            
             
 
-
+            
         
-        checkIfFollower(visiteeUser?.id, setIsFollower)
+        checkIfFollower(visiteeUser?.id, setIsFollower as Dispatch<SetStateAction<boolean>>)
 
         // return () =>  {componentIsMounted.current = false}
 
@@ -237,10 +252,10 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
         let isMounted = true; 
 
 
-        const checkIsFollower = async (user_id, setIsFollower) => {
+        const checkIsFollower = async (user_id: string, setIsFollower: Dispatch<SetStateAction<boolean>>) => {
 
 
-                if(user_id && !(loggedInUser.username === "")){
+                if(user_id && !(loggedInUser?.username === "" )){
     
                     loggedIsFollower(user_id).then( checkIsFollower => {
 
@@ -270,7 +285,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
 
         }
         
-        checkIsFollower(visiteeUser?.id, setIsFollower)
+        checkIsFollower(visiteeUser?.id, setIsFollower as Dispatch<SetStateAction<boolean>>)
 
         return () => { isMounted = false };
 
@@ -287,7 +302,7 @@ const Follow:FC = ({ visiteeUser, buttonClasses, followCountClass }) => {
             <p className={followCountClass}>Followers:<em>{ followerCount?.followers? " " +followerCount?.followers: " Error"}</em></p> 
             <p className={followCountClass}>Following:<em>{followerCount?.following? " " +followerCount?.following: " Error"}</em></p>
 
-            {visiteeUser.username === loggedInUser.username
+            {visiteeUser.username === loggedInUser?.username
             ?  
             " "
             :

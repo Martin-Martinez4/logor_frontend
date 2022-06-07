@@ -33,9 +33,10 @@ const Signout = () => {
         .then((response) => response.json())
         .then((user) => {
 
-            unloadUser()
+                
+            unloadUser!()
             
-            setAuth(() => {
+            setAuth!(() => {
                 
                 return { user_id: "", access_token:"" }
             });
