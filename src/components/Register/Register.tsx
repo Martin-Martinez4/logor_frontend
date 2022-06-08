@@ -30,6 +30,7 @@ const Register:FC = () => {
     const password2ErrorMessafe = "Passwords must match"
     const emailErrorMessage = "Please input a valid email address"
 
+    
     const genericErrorMessage = "Please fix issues to continue"
     const registerErrorMessage = "A problem occured when trying to register account"
     const signinErrorMessage = "The account was created but a problem occured when trying to signin account to account. Redirecting to home page"
