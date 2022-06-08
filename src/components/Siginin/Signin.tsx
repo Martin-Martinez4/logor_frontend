@@ -190,7 +190,7 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
     return (
         
     <form className="signin flexColContainer">
-
+        {console.log("mode: " +process.env.NODE_ENV)}
 
         <h2 className="signin__title"> Welcome!</h2>
         <h3 className="signin__title">Login!</h3>
