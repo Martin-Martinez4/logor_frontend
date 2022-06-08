@@ -1,7 +1,7 @@
 
 export const getRespones = async (comment_id: string) => {
 
-    const responsesComments = await fetch(`http://localhost:3001/responses/${comment_id}`, {
+    const responsesComments = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/responses/${comment_id}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},
@@ -21,7 +21,7 @@ export const getRespones = async (comment_id: string) => {
 }
 export const getResponsesCount = async (comment_id: string) => {
 
-    const responsesCount = await fetch(`http://localhost:3001/responses/count/${comment_id}`, {
+    const responsesCount = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/responses/count/${comment_id}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},
@@ -42,7 +42,7 @@ export const getResponsesCount = async (comment_id: string) => {
 
 export const addResponse = async (parent_id: string, comment_id: string) => {
 
-    const response = await fetch(`http://localhost:3001/thread/add/response/`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/thread/add/response/`, {
 
             method: "post",
             headers: { "Content-Type": "application/json"},

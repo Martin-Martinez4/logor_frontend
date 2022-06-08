@@ -155,7 +155,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
                 //  SELECT * FROM tag_comment JOIN comments ON comments.comment_id = tag_comment.comment_id jOIN user_headers ON comments.user_id = user_headers.user_id WHERE tag_id = '849998ef-e4b6-48ce-aa0d-7bbef2ee1995' ORDER BY comments.created_at;
     
     
-                fetch(`http://localhost:3001/tags/byName/${userOrTagID}`, {
+                fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/byName/${userOrTagID}`, {
                     method: "get",
                     headers:  {"Content-Type": "application/json"},
                 }).then(response => response.json())
@@ -172,7 +172,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
             else if(location.pathname.includes("/users/nickname/")){
     
     
-                await fetch(`http://localhost:3001/users/byNickname/${userOrTagID}`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/byNickname/${userOrTagID}`, {
                     method: "get",
                     headers:  {"Content-Type": "application/json"},
                 }).then(response => response.json())
@@ -186,7 +186,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
     
              
     
-                fetch(`http://localhost:3001/users/${userOrTagID}`, {
+                fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/${userOrTagID}`, {
                     method: "get",
                     headers:  {"Content-Type": "application/json"},
                 }).then(response => response.json())
@@ -205,7 +205,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
                 //  SELECT * FROM tag_comment JOIN comments ON comments.comment_id = tag_comment.comment_id jOIN user_headers ON comments.user_id = user_headers.user_id WHERE tag_id = '849998ef-e4b6-48ce-aa0d-7bbef2ee1995' ORDER BY comments.created_at;
     
     
-                fetch(`http://localhost:3001/tags/${userOrTagID}`, {
+                fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/${userOrTagID}`, {
                     method: "get",
                     headers:  {"Content-Type": "application/json"},
                 }).then(response => response.json())
@@ -255,7 +255,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
 
         if (location.pathname.includes("/tags/name/")){
 
-            await fetch(`http://localhost:3001/tags/byName/${userOrTagID}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/byName/${userOrTagID}`, {
                 method: "get",
                 headers:  {"Content-Type": "application/json"},
             }).then(response => response.json())
@@ -267,7 +267,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
         else if(location.pathname.includes("/users/nickname/")){
 
     
-            await fetch(`http://localhost:3001/users/byNickname/${userOrTagID}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/byNickname/${userOrTagID}`, {
                 method: "get",
                 headers:  {"Content-Type": "application/json"},
             })
@@ -284,7 +284,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
     
              
     
-            fetch(`http://localhost:3001/users/${userOrTagID}`, {
+            fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/${userOrTagID}`, {
                 method: "get",
                 headers:  {"Content-Type": "application/json"},
             }).then(response => response.json())
@@ -301,7 +301,7 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
             //  SELECT * FROM tag_comment JOIN comments ON comments.comment_id = tag_comment.comment_id jOIN user_headers ON comments.user_id = user_headers.user_id WHERE tag_id = '849998ef-e4b6-48ce-aa0d-7bbef2ee1995' ORDER BY comments.created_at;
 
 
-            fetch(`http://localhost:3001/tags/${userOrTagID}`, {
+            fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/${userOrTagID}`, {
                 method: "get",
                 headers:  {"Content-Type": "application/json"},
             }).then(response => response.json())

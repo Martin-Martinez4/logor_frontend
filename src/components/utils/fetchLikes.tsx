@@ -1,7 +1,7 @@
 
 export const getLikesCount = async (comment_id: string) => {
 
-    const count = await fetch(`http://localhost:3001/comment/count/likes/${comment_id}`, {
+    const count = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/count/likes/${comment_id}`, {
 
     method: "get",
     headers: { "Content-Type": "application/json"},
@@ -24,7 +24,7 @@ export const userLiked = async (comment_id: string ) => {
 
     
 
-    const userLiked = await fetch(`http://localhost:3001/user/liked/comment/`, {
+    const userLiked = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/user/liked/comment/`, {
 
         method: "post",
         credentials:'include',
@@ -57,7 +57,7 @@ export const userLiked = async (comment_id: string ) => {
 
 export const createLike = async (comment_id: string) => {
 
-    const response = await fetch(`http://localhost:3001/comment/add/like/`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/add/like/`, {
 
         method: "post",
         credentials:'include',
@@ -84,7 +84,7 @@ export const createLike = async (comment_id: string) => {
 
 export const deleteLike = async (comment_id: string ) => {
 
-    const response = await fetch(`http://localhost:3001/comment/delete/like/`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/delete/like/`, {
 
         method: "delete",
         credentials:'include',

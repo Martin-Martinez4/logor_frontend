@@ -109,7 +109,7 @@ const PostBox:FC<CommentBoxProps> = ({ createPosts, setPostsArray, postListFetch
 
         const comment_id = uuidv4();
 
-        await fetch(`http://localhost:3001/home/create/comments`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/create/comments`, {
 
             method: "post",
             credentials:'include',

@@ -1,7 +1,7 @@
 
 export const getRandomUserIDs = async (number: number) => {
 
-    const userIDs = await fetch(`http://localhost:3001/users/info/random/${number}`, {
+    const userIDs = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/info/random/${number}`, {
 
         method: "get",
     headers: { "Content-Type": "application/json"},

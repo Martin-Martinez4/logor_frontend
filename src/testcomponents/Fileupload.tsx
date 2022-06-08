@@ -20,7 +20,7 @@ const Fileupload:FC = () => {
 
         formData.append('image', uploadedImage? uploadedImage : "")
 
-        fetch(`http://localhost:3001/api/image/`, {
+        fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/image/`, {
 
             method: 'POST',
             body: formData,

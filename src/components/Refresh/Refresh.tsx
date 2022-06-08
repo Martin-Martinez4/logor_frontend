@@ -16,7 +16,7 @@ const Homepage:FC = () => {
 
         (() => {
 
-            fetch('http://localhost:3001/token/refresh/', {
+            fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/token/refresh/`, {
 
                 method: "get",
                 credentials:'include',

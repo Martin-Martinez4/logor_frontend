@@ -7,7 +7,7 @@ export const userSearch = async (searchQuery:string) => {
     }
     else{
 
-        const usersObject = await fetch(`http://localhost:3001/users/search/`, {
+        const usersObject = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/search/`, {
     
         method: "post",
         headers: { "Content-Type": "application/json"},
@@ -41,7 +41,7 @@ export const tagSearch = async (searchQuery:string) => {
     else{
 
     
-        const tagssObject = await fetch(`http://localhost:3001/tags/search/`, {
+        const tagssObject = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/search/`, {
     
         method: "post",
         headers: { "Content-Type": "application/json"},

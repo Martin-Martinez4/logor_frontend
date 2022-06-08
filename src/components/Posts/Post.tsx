@@ -215,7 +215,7 @@ const Post: FC<PostComponent> = ({ uuid, username, nickname, profile_pic_url, da
         e.preventDefault();
         setDropDownLoading(true)
 
-        await fetch(`http://localhost:3001/home/delete/${uuid}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/delete/${uuid}`, {
     
             method: "post",
             credentials:'include',
@@ -265,7 +265,7 @@ const Post: FC<PostComponent> = ({ uuid, username, nickname, profile_pic_url, da
         toggleEditMode()
 
 
-        await fetch(`http://localhost:3001/home/update/${uuid}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/update/${uuid}`, {
     
             method: "post",
             credentials:'include',

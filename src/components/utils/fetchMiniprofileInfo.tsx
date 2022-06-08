@@ -1,7 +1,7 @@
 
 export const getMiniProfileInfo = async (user_id: string) => {
 
-    const userInfo = await fetch(`http://localhost:3001/users/info/miniprofile/${user_id}`, {
+    const userInfo = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/info/miniprofile/${user_id}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},

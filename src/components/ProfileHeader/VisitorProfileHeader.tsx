@@ -89,7 +89,7 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
             console.log("header", userOrTagID)
             try{
 
-                await fetch(`http://localhost:3001/usersInfo/byNickname/${userOrTagID}`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/usersInfo/byNickname/${userOrTagID}`, {
                     method: "get",
                     headers: { "Content-Type": "application/json"},
                 }).then(response => response.json())
@@ -149,7 +149,7 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
 
             console.log("byID")
 
-            await fetch(`http://localhost:3001/usersInfo/${userOrTagID}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/usersInfo/${userOrTagID}`, {
                 method: "get",
                 headers: { "Content-Type": "application/json"},
             }).then(response => response.json())

@@ -70,7 +70,7 @@ const MentionsPage:FC = () => {
 
         const getMentionPost = async () => {
 
-            await fetch(`http://localhost:3001/home/posts/mentions/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/posts/mentions/`, {
                 method: "get",
                 credentials:'include',
                     cache:'no-cache',
@@ -119,7 +119,7 @@ const MentionsPage:FC = () => {
 
         setSeeMoreLoading(true)
 
-        await fetch(`http://localhost:3001/home/posts/mentions/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/posts/mentions/`, {
             method: "get",
             credentials:'include',
                 cache:'no-cache',

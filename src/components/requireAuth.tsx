@@ -1,3 +1,5 @@
+
+
 import { useEffect, useContext } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
@@ -15,11 +17,12 @@ interface UserInformation {
     links: string;
     followers: string;
     following: string;
-
+    
 }
 
 const RequireAuth = () => {
     
+    // console.log(`env var: ${process.env.REACT_APP_BACKEND_BASE_URL}`)
     const { auth } = useAuth();
     const location = useLocation();
     const { loadUser } = useContext( UserInfoContext);
@@ -31,11 +34,8 @@ const RequireAuth = () => {
 
             try{
 
-                if(user_id){
 
-                }
-
-                await fetch(`http://localhost:3001/usersInfo/${user_id}`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/usersInfo/${user_id}`, {
                 
                     method: "get",
                     headers: {
@@ -47,19 +47,25 @@ const RequireAuth = () => {
                 .then(user => {
         
                     try{
-        
-                    loadUser(user[0]) 
+
+                    // console.log(user)
+
+                        if(user){
+
+                            loadUser(user[0]) 
+                        }
                         
                     }
                     catch(err){
         
-                        console.error(err)
+                        return console.error(err)
                     }
                 })
-                .catch(
-                    
-                    
-                )
+                .catch(err => {
+
+                    console.error(err)
+
+                })
 
             }catch(err){
 

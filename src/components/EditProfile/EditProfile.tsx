@@ -257,7 +257,7 @@ const EditProfile = () => {
 
         setButtonPressedLaoding(true);
 
-        await fetch(`http://localhost:3001/header/delete/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/header/delete/`, {
 
             method: "post",
             credentials:'include',
@@ -272,7 +272,7 @@ const EditProfile = () => {
 
         if(typeof header_img_url === "string"){
 
-            await fetch(`http://localhost:3001/header/update/default/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/header/update/default/`, {
      
                 method: "post",
                 credentials:'include',
@@ -302,7 +302,7 @@ const EditProfile = () => {
 
             formDataHeader.append('image', header_img_url)
 
-            await fetch(`http://localhost:3001/header/update/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/header/update/`, {
      
                 method: "post",
                 credentials:'include',
@@ -333,7 +333,7 @@ const EditProfile = () => {
 
         setButtonPressedLaoding(true);
 
-        await fetch(`http://localhost:3001/profile/delete/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/profile/delete/`, {
 
             method: "post",
             credentials:'include',
@@ -349,7 +349,7 @@ const EditProfile = () => {
 
         if(typeof profile_pic_url === "string"){
 
-            await fetch(`http://localhost:3001/profile/update/default/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/profile/update/default/`, {
      
                 method: "post",
                 credentials:'include',
@@ -380,7 +380,7 @@ const EditProfile = () => {
 
             formDataProfile.append('image', profile_pic_url)
 
-            await fetch(`http://localhost:3001/profile/update/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/profile/update/`, {
      
                 method: "post",
                 credentials:'include',
@@ -417,7 +417,7 @@ const EditProfile = () => {
 
         if(usernameValidate && usernameAvailable){
 
-            await fetch(`http://localhost:3001/update/username/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/update/username/`, {
         
             method: "post",
             credentials:'include',
@@ -466,7 +466,7 @@ const EditProfile = () => {
 
         if(nicknameValidate && nicknameAvailable){
 
-        await fetch(`http://localhost:3001"/update/nickname/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}"/update/nickname/`, {
      
                 method: "post",
                 credentials:'include',
@@ -510,7 +510,7 @@ const EditProfile = () => {
 
         setButtonPressedLaoding(true);
 
-        await fetch(`http://localhost:3001/update/description/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/update/description/`, {
      
                 method: "post",
                 credentials:'include',
@@ -543,7 +543,7 @@ const EditProfile = () => {
 
         setButtonPressedLaoding(true);
 
-        await fetch(`http://localhost:3001/update/location/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/update/location/`, {
      
                 method: "post",
                 credentials:'include',
@@ -577,7 +577,7 @@ const EditProfile = () => {
 
         setButtonPressedLaoding(true);
 
-        await fetch(`http://localhost:3001/update/links/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/update/links/`, {
      
                 method: "post",
                 credentials:'include',

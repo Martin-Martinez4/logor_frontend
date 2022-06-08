@@ -20,7 +20,7 @@ const Signout = () => {
     const logoutProcess = async () => {
 
         console.log("got here")
-        await fetch('http://localhost:3001/signout', {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/signout`, {
 
             method: "get",
             credentials:'include',

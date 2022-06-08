@@ -2,7 +2,7 @@
 export const getHomePosts = async () => {
 
     
-    const promise = await fetch(`http://localhost:3001/home/`, {
+    const promise = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/`, {
         method: "get",
         credentials:'include',
             cache:'no-cache',
@@ -18,7 +18,7 @@ export const getHomePosts = async () => {
 
 export const getResponsesPosts = async (parent_id: string) => {
 
-    const promise = await fetch(`http://localhost:3001/responses/${parent_id}`, {
+    const promise = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/responses/${parent_id}`, {
 
         method: "get",
         cache:  "no-cache",

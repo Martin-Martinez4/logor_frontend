@@ -1,6 +1,6 @@
 
 export const fetchTagNameByComment = async (comment_id: string) => {
-    const test = await fetch(`http://localhost:3001/tags/byName/comment/${comment_id}`, {
+    const test = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/tags/byName/comment/${comment_id}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},
@@ -16,7 +16,7 @@ export const fetchTagNameByComment = async (comment_id: string) => {
 }
 
 export const fetchMentionsByComment = async (comment_id : string) => {
-    const test = await fetch(`http://localhost:3001/mentions/byName/comment/${comment_id}`, {
+    const test = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/mentions/byName/comment/${comment_id}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},
@@ -39,7 +39,7 @@ export const fetchMentionsByComment = async (comment_id : string) => {
 export const insertTagIfNotExist = async (tagname: string) => {
 
 
-        await fetch('http://localhost:3001/create/tag/', {
+        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/create/tag/', {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
@@ -59,7 +59,7 @@ export const insertTagIfNotExist = async (tagname: string) => {
 export const insertTagCommentRelation  = async (tagName: string, comment_id: string) => {
 
 
-        await fetch('http://localhost:3001/comment/addTag/', {
+        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addTag/', {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
@@ -82,7 +82,7 @@ export const insertTagCommentRelation  = async (tagName: string, comment_id: str
 export const insertMentionRelation  = async (mentioned_nickname: string, comment_id:  string) => {
 
 
-        await fetch('http://localhost:3001/comment/addMention/', {
+        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addMention/', {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
@@ -103,7 +103,7 @@ export const insertMentionRelation  = async (mentioned_nickname: string, comment
 
 export const deleteTagCommentRelation  = async (tagName: string, comment_id:  string) => {
 
-    await fetch('http://localhost:3001/comment/deleteTag/', {
+    await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/deleteTag/`, {
 
         method: "delete",
         headers: { "Content-Type": "application/json"},
@@ -123,7 +123,7 @@ export const deleteTagCommentRelation  = async (tagName: string, comment_id:  st
 
 export const deleteMentionRelation  = async (mentioned_nickname: string, comment_id: string) => {
 
-    await fetch('http://localhost:3001/comment/deleteMention/', {
+    await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/deleteMention/`, {
 
         method: "delete",
         headers: { "Content-Type": "application/json"},

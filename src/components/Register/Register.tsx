@@ -224,7 +224,7 @@ const Register:FC = () => {
       
         if(password === password2){
 
-            await fetch('http://localhost:3001/register', {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/register`, {
     
                 method: "post",
                 headers: { "Content-Type": "application/json"},
@@ -277,7 +277,7 @@ const Register:FC = () => {
                 return       
             })
 
-            await fetch('http://localhost:3001/signin2', {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/signin2`, {
 
                 method: "post",
                 credentials:'include',
@@ -363,7 +363,7 @@ const Register:FC = () => {
             if(typeof profile_pic_url === "string"){
 
 
-                await fetch(`http://localhost:3001/profile/update/default/`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/profile/update/default/`, {
          
                     method: "post",
                     credentials:'include',
@@ -394,7 +394,7 @@ const Register:FC = () => {
 
                 formDataProfile.append('image', profile_pic_url)
 
-                await fetch(`http://localhost:3001/profile/update/`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/profile/update/`, {
          
                     method: "post",
                     credentials:'include',
@@ -418,7 +418,7 @@ const Register:FC = () => {
     
             if(typeof header_img_url === "string"){
 
-                await fetch(`http://localhost:3001/header/update/default/`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/header/update/default/`, {
          
                     method: "post",
                     credentials:'include',
@@ -449,7 +449,7 @@ const Register:FC = () => {
 
                 formDataHeader.append('image', header_img_url)
 
-                await fetch(`http://localhost:3001/header/update/`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/header/update/`, {
          
                     method: "post",
                     credentials:'include',
@@ -472,7 +472,7 @@ const Register:FC = () => {
             }
     
 
-            await fetch(`http://localhost:3001/loggedin/user/info/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/loggedin/user/info/`, {
     
                 method: "get",
                 credentials:'include',

@@ -95,7 +95,7 @@ const PostList: FC = () => {
 
             setPostlistLoading(true)
     
-            await fetch(`http://localhost:3001/home/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/`, {
                     method: "get",
                     credentials:'include',
                         cache:'no-cache',
@@ -169,7 +169,7 @@ const PostList: FC = () => {
 
         setSeeMoreLoading(true)
 
-        await fetch(`http://localhost:3001/home/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/`, {
             method: "get",
             credentials:'include',
                 cache:'no-cache',

@@ -1,7 +1,7 @@
 
 export const getUserIdByNickname = async (nickname: string) => {
 
-    const user_id = await fetch(`http://localhost:3001/userID/${nickname}`, {
+    const user_id = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/userID/${nickname}`, {
 
         method: "get",
         headers: { "Content-Type": "application/json"},

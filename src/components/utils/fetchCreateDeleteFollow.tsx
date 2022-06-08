@@ -2,7 +2,7 @@
 // followee = being followed
 export const createFollow = async (followee_id: string) => {
 
-    const followResponse = await fetch(`http://localhost:3001/following/create/`, {
+    const followResponse = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/following/create/`, {
 
             method: "post",
             credentials:'include',
@@ -24,7 +24,7 @@ export const createFollow = async (followee_id: string) => {
 
 export const deleteFollow = async (followee_id: string) => {
 
-    const followResponse = await fetch(`http://localhost:3001/following/delete/`, {
+    const followResponse = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/following/delete/`, {
 
         method: "delete",
         credentials:'include',

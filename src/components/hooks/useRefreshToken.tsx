@@ -7,7 +7,7 @@ const useRefreshToken = () => {
     const refresh = async () => {
 
         // get refresh token like in siginin
-        await fetch('http://localhost:3001/token/refresh/', {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/token/refresh/`, {
 
             method: "get",
             credentials:'include',

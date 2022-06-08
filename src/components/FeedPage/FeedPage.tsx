@@ -70,7 +70,7 @@ const FeedPage = () => {
             setPostlistLoading(true)
 
 
-            await fetch(`http://localhost:3001/home/posts/feed/`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/posts/feed/`, {
                 method: "get",
                 credentials:'include',
                     cache:'no-cache',
@@ -119,7 +119,7 @@ const FeedPage = () => {
 
         setSeeMoreLoading(true)
 
-        await fetch(`http://localhost:3001/home/posts/feed/`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/home/posts/feed/`, {
             method: "get",
             credentials:'include',
                 cache:'no-cache',

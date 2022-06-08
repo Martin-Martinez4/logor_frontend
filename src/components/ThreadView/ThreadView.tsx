@@ -82,7 +82,7 @@ const ThreadView = () => {
 
         const makePostlist = async (allComments: any) => {
 
-            await fetch(`http://localhost:3001/responses/${comment_id}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/responses/${comment_id}`, {
                         method: "get",
                         credentials:'include',
                             cache:'no-cache',
@@ -118,7 +118,7 @@ const ThreadView = () => {
 
                 setPostlistLoading(true)
 
-                await fetch(`http://localhost:3001/responses/recursive/${comment_id}`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/responses/recursive/${comment_id}`, {
                     method: "get",
                     credentials:'include',
                         cache:'no-cache',
@@ -154,7 +154,7 @@ const ThreadView = () => {
             // uuid, userName, nickname, user_profile, date_posted, text_content, status
             // /post/:id
     
-            await fetch(`http://localhost:3001/post/${comment_id}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/post/${comment_id}`, {
                 method: "get",
                 credentials:'include',
                     cache:'no-cache',

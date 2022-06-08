@@ -10,7 +10,7 @@ export const refreshToken = async (setAuth: Dispatch<SetStateAction<Auth>>) => {
 
 
         // get refresh token like in siginin
-        const refreshToken = await fetch('http://localhost:3001/token/refresh/', {
+        const refreshToken = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/token/refresh/`, {
 
             method: "get",
             credentials:'include',

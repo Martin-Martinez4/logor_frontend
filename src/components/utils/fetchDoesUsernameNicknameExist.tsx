@@ -1,7 +1,7 @@
 
 export const checkIfUsernameExists = async (username:string) => {
 
-    const ifExists =  await fetch(`http://localhost:3001/available/username?username=${username}`, {
+    const ifExists =  await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/available/username?username=${username}`, {
 
             method: "get",
             headers: { "Content-Type": "application/json"},
@@ -19,7 +19,7 @@ export const checkIfUsernameExists = async (username:string) => {
 
 export const checkIfNicknameExists = async (nickname:string) => {
 
-    const ifExists =  await fetch(`http://localhost:3001/available/nickname?nickname=${nickname}`, {
+    const ifExists =  await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/available/nickname?nickname=${nickname}`, {
 
             method: "get",
             headers: { "Content-Type": "application/json"},

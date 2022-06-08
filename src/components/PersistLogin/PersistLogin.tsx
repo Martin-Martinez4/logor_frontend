@@ -25,7 +25,7 @@ const PersistLogin = () => {
                 
                 await refresh();
 
-                await fetch(`http://localhost:3001/loggedin/user/info/`, {
+                await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/loggedin/user/info/`, {
 
                     method: "get",
                     credentials:'include',

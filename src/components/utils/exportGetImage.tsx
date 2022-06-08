@@ -1,6 +1,6 @@
 
-export const getImageString = "http://localhost:3001/temp?filepath="
-export const serverAddressString = "http://localhost:3001"
+export const getImageString = `${process.env.REACT_APP_BACKEND_BASE_URL}/temp?filepath=`
+export const serverAddressString = `${process.env.REACT_APP_BACKEND_BASE_URL}`
 
 // Set in component as such:
 // ( async (getProfileImage, setPictures) => {
