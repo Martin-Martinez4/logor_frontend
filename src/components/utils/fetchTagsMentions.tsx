@@ -39,7 +39,7 @@ export const fetchMentionsByComment = async (comment_id : string) => {
 export const insertTagIfNotExist = async (tagname: string) => {
 
 
-        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/create/tag/', {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/create/tag/`, {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
@@ -59,7 +59,7 @@ export const insertTagIfNotExist = async (tagname: string) => {
 export const insertTagCommentRelation  = async (tagName: string, comment_id: string) => {
 
 
-        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addTag/', {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addTag/`, {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
@@ -82,7 +82,7 @@ export const insertTagCommentRelation  = async (tagName: string, comment_id: str
 export const insertMentionRelation  = async (mentioned_nickname: string, comment_id:  string) => {
 
 
-        await fetch('${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addMention/', {
+        await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/comment/addMention/`, {
 
             method: "post",
             headers: { "Content-Type": "application/json"},
