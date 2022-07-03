@@ -77,6 +77,8 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
         
         const {username, password} = demo === false ? userCreds : {username: `${process.env.REACT_APP_GUEST_USERNAME}`, password: `${process.env.REACT_APP_GUEST_PASSWORD}`}
 
+        console.log({username: `${process.env.REACT_APP_GUEST_USERNAME}`, password: `${process.env.REACT_APP_GUEST_PASSWORD}`})
+
         await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/signin2`, {
 
             method: "post",
