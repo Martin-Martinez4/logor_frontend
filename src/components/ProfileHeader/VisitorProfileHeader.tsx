@@ -84,9 +84,7 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
 
         if(location.pathname.includes("/users/nickname/")){
             
-            console.log("header by nickname")
 
-            console.log("header", userOrTagID)
             try{
 
                 await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/usersInfo/byNickname/${userOrTagID}`, {
@@ -95,7 +93,6 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
                 }).then(response => response.json())
                 .then(userInfo => {
         
-                    console.log("userIfno", userInfo[0])
 
                     if(userInfo[0] === undefined){
 
@@ -125,7 +122,6 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
                 const followersCount =  await getFollowersCount(userID)
                 const followingCount =  await getFollowingCount(userID)
 
-                // console.log("followers: ", followersCount, " Following: ", followingCount)
 
                 setVisiteeUser((prev) => 
                         ({...prev, 
@@ -147,7 +143,6 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
         }
         else{
 
-            console.log("byID")
 
             await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/usersInfo/${userOrTagID}`, {
                 method: "get",
@@ -155,11 +150,9 @@ const VisitorProfileHeader:FC<userOrTagID> = ({ userOrTagID }) =>{
             }).then(response => response.json())
             .then(userInfo => {
     
-                console.log("userIfno", userInfo[0])
              
                 if(userInfo[0] === undefined){
 
-                    console.log("userInfo: ",userInfo[0])
 
                     setUndefUser(true)
                         

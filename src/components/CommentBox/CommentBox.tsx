@@ -167,7 +167,6 @@ const PostBox:FC<CommentBoxProps> = ({ createPosts, setPostsArray, postListFetch
 
             setButtonLoading(false)
 
-            console.log("error")
             toggleModal!()
             console.error(error);
 

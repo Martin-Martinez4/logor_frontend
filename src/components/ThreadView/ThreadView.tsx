@@ -129,7 +129,6 @@ const ThreadView = () => {
                 }).then(response => response.json())
                 .then(async comments => {
 
-                    console.log({comments})
                     
                     setAllComments(comments)
 

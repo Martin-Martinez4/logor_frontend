@@ -44,7 +44,6 @@ export const HeartIcon2: FC<HeartIcon2Props> = ({ comment_id, loggedInId }) => {
             
         }else{
 
-            console.log("create like")
 
             await createLike(comment_id)
         }
@@ -74,9 +73,6 @@ export const HeartIcon2: FC<HeartIcon2Props> = ({ comment_id, loggedInId }) => {
 
         (async (comment_id, loggedInId, userLiked) => {
 
-            console.log(comment_id)
-
-            console.log("heart SVG: ", loggedInId)
 
             let tempLiked;
 
@@ -97,7 +93,6 @@ export const HeartIcon2: FC<HeartIcon2Props> = ({ comment_id, loggedInId }) => {
             setLoggedInLiked(tempLiked)
 
 
-            // console.log("loogined: ", loggedInLiked)
             
             // get didLoggedInLike
             // set animateClass to didLoggedInLike response
@@ -110,7 +105,6 @@ export const HeartIcon2: FC<HeartIcon2Props> = ({ comment_id, loggedInId }) => {
 
     useEffect(() => {
 
-        // console.log(animateClass);
 
     }, [animateClass])
 

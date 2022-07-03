@@ -60,12 +60,9 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
 
      const CreatePostList = (comments: PostsArray, postIncrement: number) => {
 
-        // console.log("comments: ",createPosts(comments))
-                    
                     
         setPostsArray(createPosts(comments))
 
-        // console.log("postArray: ", postsArray)
 
         let start = 0;
         let howMany = postIncrement;
@@ -84,13 +81,11 @@ const VisitorPostList: FC<userOrTagID> = ({ userOrTagID }) => {
 
         setPostsArray(createPosts(comments))
     
-        // console.log(postsArray)
 
         if(postsArray && lastPostShown < postsArray?.length ){
     
             const lastNewPostIndex = lastPostShown? lastPostShown + incrementBy: incrementBy
 
-            console.log(lastNewPostIndex)
     
             setLastPostShown(lastNewPostIndex)
     

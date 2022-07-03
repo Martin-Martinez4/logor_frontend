@@ -30,14 +30,11 @@ const Homepage:FC = () => {
             .then((user) => {
                 
     
-                console.log(user)
     
-                console.log(user.access_token)
                 if(user.access_token){
     
                     // const from = location.state?.from?.pathname || `/user/1`;
     
-                    console.log(user.access_token)
                     // token stuff
     
                     setAuth!({ user_id: user.user_id, access_token:user.access_token });

@@ -223,8 +223,6 @@ const EditProfile = () => {
 
     const toggleEditMode = (stateName: string, stateValue: boolean, setStateFunction: (x: (prev: any) => any) => void) => {
 
-        // console.log(stateValue)
-
         setStateFunction(prev => ({...prev, [stateName]:!stateValue}))
 
 

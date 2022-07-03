@@ -18,7 +18,6 @@ export const getProfileImageBlob = async (filePath: string) => {
     .then(imageBlob => {
         // Then create a local URL for that image and print it 
         const imageObjectURL = URL.createObjectURL(imageBlob);
-        console.log("imageObjectURL: ", imageObjectURL);
 
         return imageObjectURL
     })
@@ -27,7 +26,6 @@ export const getProfileImageBlob = async (filePath: string) => {
         return []
     });
 
-    console.log("image: ", image)
 
     return image
 

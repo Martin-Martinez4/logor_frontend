@@ -68,14 +68,14 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
 
     }
 
-    const onAttemptLogin = async (e: { preventDefault: () => void; }) => {
+    const onAttemptLogin = async (e: { preventDefault: () => void; }, demo: boolean = false) => {
 
         
         e.preventDefault();
 
         setSigninLoading(true)
         
-        const {username, password} = userCreds
+        const {username, password} = demo === false ? userCreds : {username: `${process.env.REACT_APP_GUEST_USERNAME}`, password: `${process.env.REACT_APP_GUEST_PASSWORD}`}
 
         await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/signin2`, {
 
@@ -124,7 +124,6 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
                     .then(res => res.json())
                     .then(user => {
 
-                        console.log(user[0])
 
                         try{
 
@@ -189,50 +188,49 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
 
     return (
         
-    <form className="signin flexColContainer">
-        {console.log("mode: " +process.env.NODE_ENV)}
-        {console.log("backend: " +process.env.REACT_APP_BACKEND_BASE_URL)}
+        <form className="signin flexColContainer">
 
-        <h2 className="signin__title"> Welcome!</h2>
-        <h3 className="signin__title">Login!</h3>
+            <h2 className="signin__title"> Welcome!</h2>
+            <h3 className="signin__title">Login!</h3>
 
-        <div className=" flexColContainer inner">
-        <LoaderHOC loading={signinLoading}>
-            <div className="flexColContainer">
+            <div className=" flexColContainer inner">
+                <LoaderHOC loading={signinLoading}>
+                    <div className="flexColContainer">
 
-                <span className={`${loginError.inputError?"errorBackground":loginError.flagTripped?"fadeOut":"hdden"}`} >incorrect username and/or password</span>
+                        <span className={`${loginError.inputError?"errorBackground":loginError.flagTripped?"fadeOut":"hdden"}`} >incorrect username and/or password</span>
 
 
-                <label htmlFor="uname" className="upperleft ">
-                
-                    <h4 className="inputName">Username</h4> 
-                    <input className="" type="text" placeholder="Enter Username" name="username" onChange={oninputChange} required />
-                </label>
-                
-                <label htmlFor="password" className="upperleft">
-                    <h4 className="inputName">Password</h4>
-                
-                    <input type="password" placeholder="Enter Password" name="password" onChange={oninputChange} required />
-                </label>
+                        <label htmlFor="uname" className="upperleft ">
+                        
+                            <h4 className="inputName">Username</h4> 
+                            <input className="" type="text" placeholder="Enter Username" name="username" onChange={oninputChange} required />
+                        </label>
+                        
+                        <label htmlFor="password" className="upperleft">
+                            <h4 className="inputName">Password</h4>
+                        
+                            <input type="password" placeholder="Enter Password" name="password" onChange={oninputChange} required />
+                        </label>
 
-                <div>
-                    <button type="submit" className=" button primary" onClick={onAttemptLogin} >Login</button>
-                </div>
-                <div>
-                    <label>
-                        <input type="checkbox" name="remember" />Remember Me?
-                    </label>
-                </div>
+                        <div>
+                            <button type="submit" className=" button primary" onClick={onAttemptLogin} >Login</button>
+                            <button type="submit" className=" button primary" onClick={(e) => onAttemptLogin(e, true)} >Guest Login</button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="remember" />Remember Me?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div className="flexColContainer inner" >
+                        <span >Forgot your password?  <Link to="/reset"> Reset your password.</Link></span>
+                        <span >Do not have an account? <Link to="/register">Register Here.</Link></span>
+                    </div>
+                </LoaderHOC>
             </div>
 
-            <div className="flexColContainer inner" >
-                <span >Forgot your password?  <Link to="/reset"> Reset your password.</Link></span>
-                <span >Do not have an account? <Link to="/register">Register Here.</Link></span>
-            </div>
-        </LoaderHOC>
-        </div>
-
-    </form>
+        </form>
 
     )
     

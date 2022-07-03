@@ -37,14 +37,12 @@ export const tagsMentionsEdit = async (comment_id: string, new_text: string) => 
     let newTags = flattenSimpleArray(newTagsArrays);
     let newMentions = flattenSimpleArray(newMentionsArrays);
     
-    // const tagsToDelete =  oldTags.filter(tag => !newTags.includes(tag))
     const tagsToDelete =  differenceArrayAFromArrayB(oldTags, newTags);
     const tagsToAdd =  differenceArrayAFromArrayB(newTags, oldTags);
 
     const mentionsToDelete =  differenceArrayAFromArrayB(oldMentions, newMentions)
     const mentionsToAdd =  differenceArrayAFromArrayB(newMentions, oldMentions)
 
-    // console.log("toAdd: ", tagsToAdd, " toDelete: ", tagsToDelete)
 
     fetchForEachIndexInAnArray(tagsToAdd, insertTagIfNotExist);
     fetchForEachIndexInAnArrayCommentID(tagsToAdd, comment_id, insertTagCommentRelation);
@@ -66,12 +64,10 @@ export const tagsMentionsCreate = async (comment_id: string, new_text: string) =
     let newTags = flattenSimpleArray(newTagsArrays);
     let newMentions = flattenSimpleArray(newMentionsArrays);
     
-    // const tagsToDelete =  oldTags.filter(tag => !newTags.includes(tag))
     const tagsToAdd =  differenceArrayAFromArrayB(newTags, []);
 
     const mentionsToAdd =  differenceArrayAFromArrayB(newMentions, [])
 
-    // console.log("toAdd: ", tagsToAdd, " toDelete: ", tagsToDelete)
 
     fetchForEachIndexInAnArray(tagsToAdd, insertTagIfNotExist);
     fetchForEachIndexInAnArrayCommentID(tagsToAdd, comment_id, insertTagCommentRelation);

@@ -22,7 +22,6 @@ interface UserInformation {
 
 const RequireAuth = () => {
     
-    // console.log(`env var: ${process.env.REACT_APP_BACKEND_BASE_URL}`)
     const { auth } = useAuth();
     const location = useLocation();
     const { loadUser } = useContext( UserInfoContext);
@@ -48,7 +47,6 @@ const RequireAuth = () => {
         
                     try{
 
-                    // console.log(user)
 
                         if(user){
 

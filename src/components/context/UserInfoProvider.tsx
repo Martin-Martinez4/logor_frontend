@@ -77,8 +77,6 @@ export const UserInfoProvider:FC = ({ children }) => {
 
     const unloadUser = async () => {
 
-        console.log("unloading")
-
         setloggedInUser(prev => ({ ...prev,
                     
             id:"",

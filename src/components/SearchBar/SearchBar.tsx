@@ -67,7 +67,6 @@ const SearchBar:FC = () => {
     useEffect(() => {
 
         
-        // console.log(searchState.topBarSearch)
         // in timeout, set throttle true api call
         
 
@@ -84,16 +83,12 @@ const SearchBar:FC = () => {
     
                 const searchQuery = searchState.topBarSearch
     
-                // console.log("searchQuery: ", searchQuery)
                 const usersSearchResults = await userSearch(searchQuery) 
                 const tagsSearchResults = await tagSearch(searchQuery)
     
-                // console.log("users search result: ", usersSearchResults)
-                // console.log("tags search result: ", tagsSearchResults)
 
                 for(let i = 0; i < usersSearchResults.length; i++){
 
-                    // console.log("sersSearchResults[i][id]: ", usersSearchResults[i]["id"])
 
                     usersResult.push(usersSearchResults[i]["id"])
                 }
@@ -108,8 +103,6 @@ const SearchBar:FC = () => {
                     })
                 }
 
-                // console.log("userResult:  ",usersResult)
-                // console.log("tagResult:  ",tagsResult)
 
                 setSearchResults({usersResult:usersResult, tagsResult:tagsResult})
                 setAutocomIsLoading(false)
@@ -124,7 +117,6 @@ const SearchBar:FC = () => {
     },[searchState])
 
     useEffect(()=> {
-        // console.log(searchResults.tagsResult, searchResults.usersResult)
 
     }, [searchResults.usersResult, searchResults.tagsResult])
 
@@ -143,11 +135,8 @@ const SearchBar:FC = () => {
 
                         <LoaderHOC loading={ autocomIsLoading } >
 
-                            console.log(searc)
-
                             {searchResults.usersResult.map((id) => {
 
-                                console.log({id})
                                 return <MiniProfile key={`miniProfile${id}`} user_id={id}/>
                             })}
                         </LoaderHOC>

@@ -37,7 +37,6 @@ const PersistLogin = () => {
                 })
                 .then(res => res.json())
                 .then(user => {
-                    // console.log("user:",user[0])
 
                     try{
 
@@ -72,9 +71,7 @@ const PersistLogin = () => {
     }, [])
 
     useEffect(() => {
-        // console.log(`isLoading: ${isLoading}`)
-        // console.log(`aT: ${auth?.access_token}`)
-        // console.log(`user-id: ${auth?.user_id}`)
+        
     }, [isLoading])
 
     return (

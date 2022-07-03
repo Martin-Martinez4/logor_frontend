@@ -20,7 +20,6 @@ export const getUserIdByNickname = async (nickname: string) => {
 
         });
 
-        console.log("userInfoFetch: ",user_id)
 
     return user_id["id"]
 

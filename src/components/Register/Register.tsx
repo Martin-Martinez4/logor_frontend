@@ -313,8 +313,6 @@ const Register:FC = () => {
                 }
                 else{
     
-                    console.log(topValid === undefined);
-
 
 
                     if(topValid === undefined){
@@ -336,7 +334,6 @@ const Register:FC = () => {
                 }
     
             }).catch((err)=> {
-                console.log({topValid});
 
                 if(topValid === undefined){
 

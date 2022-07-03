@@ -35,7 +35,6 @@ export const HeartIcon2: FC<commentId> = ({ comment_id }) => {
 
     useEffect(() => {
 
-        // console.log("hgeart loggedinuser: ", loggedInUser)
         
     }, [loggedInUser])
 
@@ -72,18 +71,15 @@ export const HeartIcon2: FC<commentId> = ({ comment_id }) => {
                     
                 }else{
         
-                    // console.log("create like")
         
                     await createLike(comment_id)
                 }
                 
                 let tempLiked = await userLiked(comment_id );
 
-                // console.log("comment_id: ", comment_id)
         
                 let numLikes = await getLikesCount(comment_id)
 
-                console.log("numLikes: ",numLikes)
         
                 setNumberOfLikes(numLikes)
         
@@ -152,7 +148,6 @@ export const HeartIcon2: FC<commentId> = ({ comment_id }) => {
     
                     tempLiked = await userLiked(comment_id );
 
-                    // console.log("temp liked: ", tempLiked)
                     
                     if (!mountedRef.current){
                         
@@ -185,7 +180,6 @@ export const HeartIcon2: FC<commentId> = ({ comment_id }) => {
 
     useEffect(() => {
 
-        // console.log(animateClass);
 
     }, [animateClass])
 

@@ -285,7 +285,6 @@ const RecursiveVisitorPost: FC<RecursiveVisitorPost> = ({ comment_id, username, 
         </Card>
     }
 
-    {console.log({text_content},childReplies?.length)}
     {
         seeMore?
                 <>

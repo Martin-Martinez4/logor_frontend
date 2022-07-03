@@ -19,7 +19,6 @@ const Signout = () => {
 
     const logoutProcess = async () => {
 
-        console.log("got here")
         await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/signout`, {
 
             method: "get",
