@@ -70,7 +70,6 @@ const Signin:FC<reDirect> = ({ reDirect }) => {
 
     const onAttemptLogin = async (e: { preventDefault: () => void; }, demo: boolean = false) => {
 
-        
         e.preventDefault();
 
         setSigninLoading(true)
